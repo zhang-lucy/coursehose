@@ -5,11 +5,10 @@
     <form>
       <div class="select">
         <label>What is your course?</label>
-        <select v-model="major">
+        <select v-model="major" onchange="validateDropdown(this)">
           <option disabled value="">Course</option>
           <option v-for="major in majors" :key="major.id" :value="major">{{ major.value }}</option>
         </select>
-        <button>Submit</button><br>
       </div>
       <div class="select">
         <label>What is your expected graduation year?</label>
@@ -38,6 +37,10 @@
     methods: {
       selectYear(year) {
         this.year = year.value;
+      },
+       validateDropDown(dd){
+        var input = document.getElementById('seedoc')
+        if(dd.value == '') input.disabled = true; else input.disabled = false;
       }
     }
   }

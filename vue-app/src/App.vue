@@ -5,7 +5,7 @@
     :years="years"/>
     <add-course @add:course="addCourse"/>
     <road :courses="courses"/>
-
+    <constraint-sidebar/>
   </div>
 </template>
 
@@ -13,13 +13,15 @@
 import MajorForm from '@/components/MajorForm.vue'
 import AddCourse from '@/components/AddCourse.vue'
 import Road from '@/components/Road.vue'
+import ConstraintSidebar from '@/components/ConstraintSidebar.vue'
 
 export default {
   name: 'App',
   components: {
     MajorForm,
     AddCourse,
-    Road
+    Road,
+    ConstraintSidebar
   },
   data() {
     return {
