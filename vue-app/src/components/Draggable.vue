@@ -1,5 +1,5 @@
 <template>
-    <div id="draggable-test">
+    <div id="two-lists">
         <div class="row">
             <div class="col-3">
             <h3>Draggable 1</h3>
@@ -35,7 +35,7 @@
 </template>
 
 <script>
-import draggable from "@/vuedraggable";
+import draggable from "@/../node_modules/vuedraggable";
 export default {
   name: "two-lists",
   display: "Two Lists",
@@ -58,21 +58,21 @@ export default {
       ]
     };
   },
-  methods: {
-    add: function() {
-      this.list.push({ name: "Juan" });
-    },
-    replace: function() {
-      this.list = [{ name: "Edgard" }];
-    },
-    clone: function(el) {
-      return {
-        name: el.name + " cloned"
-      };
-    },
-    log: function(evt) {
-      window.console.log(evt);
-    }
-  }
+//   methods: {
+//     add: function() {
+//       this.list.push({ name: "Juan" });
+//     },
+//     replace: function() {
+//       this.list = [{ name: "Edgard" }];
+//     },
+//     clone: function(el) {
+//       return {
+//         name: el.name + " cloned"
+//       };
+//     },
+//     log: function(evt) {
+//       window.console.log(evt);
+//     }
+//   }
 };
 </script>
