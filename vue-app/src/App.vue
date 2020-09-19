@@ -4,7 +4,11 @@
     <major-form :majors="majors"
     :years="years"/>
     <add-course @add:course="addCourse"/>
-    <road :semesters="semesters" @remove:course="removeCourse"/>
+    <road 
+    :semesters="semesters" 
+    :majors="majors" 
+    @remove:course="removeCourse"
+    />
     <constraint-sidebar/>
   </div>
 </template>
@@ -29,7 +33,8 @@ export default {
         f20: [],
         s21: [],
       },
-      major: 0
+      majors: [{id: 0, value: "1"},{id:1, value: "2"},{id: 2, value: "6-1"},{id: 3, value: "6-3"},{id: 4, value: "18"}],
+      years: [{id: 0, value: 2021},{id: 1, value: 2022},{id: 2, value: 2023},{id: 3, value: 2024}]
     }
   },
   methods: {

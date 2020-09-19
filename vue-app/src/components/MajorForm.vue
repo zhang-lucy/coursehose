@@ -16,10 +16,9 @@
           <option disabled value="">Year</option>
           <option v-for="year in years" :key="year.id" :value="year">{{ year.value }}</option>
         </select>
-        <button>Submit</button>
       </div>
+      <button class="submit">Submit</button>
     </form>
-    <span>Selected: {{ year }}</span>
 
   </div>
 </template>
@@ -56,5 +55,9 @@
   .select {
     display: block;
     margin-bottom: 1rem;
+  }
+  .submit{
+    display: block;
+    margin:auto;
   }
 </style>
