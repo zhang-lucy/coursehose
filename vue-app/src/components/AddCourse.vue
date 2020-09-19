@@ -6,9 +6,14 @@
       <input
         ref="first"
         type="text"
+        placeholder="Course"
         :class="{ 'has-error': submitting && invalidName }"
         v-model="course.name"
       >
+      <select v-model="course.sem">
+        <option>f20</option>
+        <option>s21</option>
+      </select>
       <button>Submit</button>
     </form>
   </div>
@@ -23,13 +28,13 @@
       return {
         course: {
           name: '',
-          semester: 'Fall 2019' // TODO: Un-hardcode
+          sem: '',
         },
       }
     },
     methods: {
       handleSubmit() {
-        console.log("Added " + this.course.name + "!");
+        console.log("Added " + this.course.name + " in " + this.course.sem + "!");
         this.$emit('add:course', this.course)
       },
     }

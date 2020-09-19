@@ -4,7 +4,7 @@
     <major-form :majors="majors"
     :years="years"/>
     <add-course @add:course="addCourse"/>
-    <road :courses="courses"/>
+    <road :semesters="semesters" @remove:course="removeCourse"/>
     <constraint-sidebar/>
   </div>
 </template>
@@ -25,34 +25,30 @@ export default {
   },
   data() {
     return {
-        // TODO: Unhardcode  
-        courses: [
-            {
-            id: 1,
-            name: '6.009',
-            },
-            {
-            id: 2,
-            name: '18.404',
-            },
-            {
-            id: 3,
-            name: '22.09',
-            },
-        ],
-        majors: [{id: 0, value: "1"},{id: 1, value: "6"},{id: 2, value: "18"}],
-        years: [{id: 0, value: 2021},{id: 1, value: 2022},{id: 2, value: 2023},{id: 3, value: 2024}]
+      semesters: { // TODO remove hardcode later, also probably rewrite with Sets idk
+        f20: [],
+        s21: [],
+      },
+      major: 0
     }
   },
   methods: {
-    addCourse(courseName) {
-      const lastId = this.courses.length > 0
-        ? this.courses[this.courses.length - 1].id
-        : 0;
-      const id = lastId + 1;
-      const newCourse = { ...courseName, id };
-      this.courses = [...this.courses, newCourse];
-    }
+    // addCourse(courseName) {
+    //   const lastId = this.courses.length > 0
+    //     ? this.courses[this.courses.length - 1].id
+    //     : 0;
+    //   const id = lastId + 1;
+    //   const newCourse = { ...courseName, id };
+    //   this.courses = [...this.courses, newCourse];
+    // }
+    addCourse(course) {
+      this.semesters[course.sem].push(course.name);
+    },
+
+    removeCourse: function(course) {
+      const index = this.semesters[course.sem].indexOf(course);
+      this.semesters[course.sem].splice(index, 1);
+    },
   }
 }
 </script>
