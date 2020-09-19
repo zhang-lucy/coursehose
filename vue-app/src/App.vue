@@ -9,6 +9,7 @@
     :majors="majors" 
     @remove:course="removeCourse"
     />
+    <two-lists/>
     <constraint-sidebar/>
   </div>
 </template>
@@ -18,6 +19,7 @@ import MajorForm from '@/components/MajorForm.vue'
 import AddCourse from '@/components/AddCourse.vue'
 import Road from '@/components/Road.vue'
 import ConstraintSidebar from '@/components/ConstraintSidebar.vue'
+import Draggable from '@/components/Draggable.vue'
 
 export default {
   name: 'App',
@@ -25,7 +27,8 @@ export default {
     MajorForm,
     AddCourse,
     Road,
-    ConstraintSidebar
+    ConstraintSidebar,
+    Draggable,
   },
   data() {
     return {

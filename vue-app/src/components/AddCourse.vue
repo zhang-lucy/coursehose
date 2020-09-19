@@ -11,6 +11,7 @@
         v-model="course.name"
       >
       <select v-model="course.sem">
+        <option disabled value="">Term</option>
         <option>f20</option>
         <option>s21</option>
       </select>
