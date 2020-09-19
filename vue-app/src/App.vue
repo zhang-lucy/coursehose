@@ -7,6 +7,16 @@
           :majors="majors" 
           @remove:course="removeCourse"
     />
+
+
+    
+    <!-- <major-form :majors="majors"
+    :years="years"/>
+    <add-course @add:course="addCourse"/>
+    <road 
+    :semesters="semesters" 
+    :majors="majors" 
+    @remove:course="removeCourse" -->
     <constraint-sidebar/>
   </div>
 </template>
