@@ -14,7 +14,6 @@
         <option>f20</option>
         <option>s21</option>
       </select>
-      <!-- <input type="text" placeholder="Semester" :class="{ 'has-error': submitting && invalidName }" v-model="course.sem"> -->
       <!-- TODO -->
       <!-- <p
         v-if="error && submitting"
@@ -38,7 +37,7 @@
       return {
         course: {
           name: '',
-          semester: '',
+          sem: '',
         },
       }
     },

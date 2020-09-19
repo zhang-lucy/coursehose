@@ -1,5 +1,17 @@
 <template>
   <div id="road">
+    <h3 v-for="(courses, semester) in semesters" :key="semester.name">
+      {{ semester }}
+
+      <div v-for="course in courses" class="course" :key="course.name">
+        <div>
+            <button @click="deleteCourse(course)">x</button>
+            <!-- <span class = "larger">{{ course.number }} </span> -->
+            <span class = "smaller">{{ course }}</span>        
+        </div>
+      </div>
+    </h3>
+
     <table>
       <thead>
         <tr>
@@ -14,6 +26,7 @@
         </tr>
       </tbody>
     </table>
+
   </div>
 </template>
 
@@ -24,4 +37,19 @@
   }
 </script>
 
-<style scoped></style>
+<style scoped>
+  .course {
+    width: 20%;
+    background: teal;
+    color: white;
+    border-radius: 10px;
+    margin: 10px;
+    padding: 10px;
+  }
+  .larger {
+      font-size: 25px;
+  }
+  .smaller {
+      font-size: 20px;
+  }
+</style>
