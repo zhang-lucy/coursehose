@@ -1,7 +1,7 @@
 <!-- TODO: Rename these files to something more meaningful -->
 
 <template>
-  <div id="major-form">
+  <div id="course-form">
     <form>
       <label>What is your course?</label>
       <input type="text" />
@@ -12,7 +12,7 @@
 
 <script>
   export default {
-    name: 'major-form',
+    name: 'course-form',
   }
 </script>
 
