@@ -1,5 +1,6 @@
 import requests
 import json
+import re
 
 
 def get_course_requirements(course_id):
@@ -18,13 +19,26 @@ def get_all_course_requirements():
 	return major_reqs
 
 
-def save_course_requirements(major_reqs, file_name):
+def get_all_major_titles():
+	major_titles = []
+	major_id_link = "https://fireroad-dev.mit.edu/requirements/list_reqs/"
+	majors = requests.get(major_id_link).json()
+	for major_id, major_info in majors.items():
+		if 'major' in major_id:
+			major_titles.append(major_info['medium-title'].split()[0] + ': ' + major_info['title-no-degree'])
+	major_titles.sort(key=lambda title: title.replace(":", " "))
+	return major_titles
+
+
+def save(data, file_name):
 	with open(file_name, 'w') as f:
-		json.dump(major_reqs, f)
+		json.dump(data, f)
 
 
 if __name__ == "__main__":
 	# course_id = input("Enter course id: ")
 	# print(get_course_requirements(course_id))
-	major_reqs = get_all_course_requirements()
-	save_course_requirements(major_reqs, "course_requirements.json")
+	# major_reqs = get_all_course_requirements()
+	# save_course_requirements(major_reqs, "course_requirements.json")
+	major_titles = get_all_major_titles()
+	save(major_titles, "major_titles.json")
