@@ -1,18 +1,18 @@
 <template>
   <div id="road">
-    <h3 v-for="(courses, semester) in semesters" :key="semester.name">
-      {{ semester }}
+    <div v-for="(courses, semester) in semesters" :key="semester.name">
+      <h3>{{ semester }}</h3>
 
       <div v-for="course in courses" class="course" :key="course.name">
         <div>
-            <button @click="deleteCourse(course)">x</button>
+            <button @click="handleDelete(semester, course)">x</button>
             <!-- <span class = "larger">{{ course.number }} </span> -->
             <span class = "smaller">{{ course }}</span>        
         </div>
       </div>
-    </h3>
+    </div>
 
-    <table>
+    <!-- <table>
       <thead>
         <tr>
           <th>Semester</th>
@@ -25,7 +25,7 @@
             <td>{{ courses }}</td>
         </tr>
       </tbody>
-    </table>
+    </table> -->
 
   </div>
 </template>
@@ -33,7 +33,12 @@
 <script>
   export default {
     name: 'road',
-    props: ['semesters']
+    props: ['semesters'],
+    methods: {
+      handleDelete(semester, course) {
+        this.$emit('remove:course', {sem: semester, name: course});
+      }
+    }
   }
 </script>
 
@@ -45,6 +50,7 @@
     border-radius: 10px;
     margin: 10px;
     padding: 10px;
+    display: inline-block;
   }
   .larger {
       font-size: 25px;

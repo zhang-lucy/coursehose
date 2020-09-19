@@ -3,7 +3,7 @@
     <h1>CourseHose</h1>
     <major-form />
     <add-course @add:course="addCourse"/>
-    <road :semesters="semesters"/>
+    <road :semesters="semesters" @remove:course="removeCourse"/>
 
   </div>
 </template>
@@ -22,7 +22,7 @@ export default {
   },
   data() {
     return {
-      semesters: { // TODO remove hardcode later
+      semesters: { // TODO remove hardcode later, also probably rewrite with Sets idk
         f20: [],
         s21: [],
       },
@@ -57,7 +57,12 @@ export default {
     // }
     addCourse(course) {
       this.semesters[course.sem].push(course.name);
-    }
+    },
+
+    removeCourse: function(course) {
+      const index = this.semesters[course.sem].indexOf(course);
+      this.semesters[course.sem].splice(index, 1);
+    },
   }
 }
 </script>
