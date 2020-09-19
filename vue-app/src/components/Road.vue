@@ -5,27 +5,12 @@
 
       <div v-for="course in courses" class="course" :key="course.name">
         <div>
-            <button @click="handleDelete(semester, course)">x</button>
-            <!-- <span class = "larger">{{ course.number }} </span> -->
-            <span class = "smaller">{{ course }}</span>        
+            <button class="close-button" @click="handleDelete(semester, course)">x</button>
+            <span class = "smaller">{{ course.name }}</span>        
         </div>
       </div>
     </div>
 
-    <!-- <table>
-      <thead>
-        <tr>
-          <th>Semester</th>
-          <th>Courses</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr v-for="(courses, semester) in semesters" :key="semester.name">
-            <td>{{ semester }}</td>
-            <td>{{ courses }}</td>
-        </tr>
-      </tbody>
-    </table> -->
 
   </div>
 </template>
@@ -43,6 +28,14 @@
 </script>
 
 <style scoped>
+  .close-button {
+    float: left;
+    border: none;
+    background: transparent;
+  }
+  .close-button:hover {
+    color: #454545;
+  }
   .course {
     width: 20%;
     background: teal;

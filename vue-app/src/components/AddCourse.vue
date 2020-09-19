@@ -7,7 +7,6 @@
         ref="first"
         type="text"
         placeholder="Course"
-        :class="{ 'has-error': submitting && invalidName }"
         v-model="course.name"
       >
       <select v-model="course.sem">
@@ -24,6 +23,7 @@
   // import '../scripts/course'
   export default {
     name: 'add-course',
+    props: ['semesters'],
     data() {
       return {
         course: {

@@ -1,31 +1,28 @@
 <template>
   <div id="app" class="small-container">
-    <h1>CourseHose</h1>
-    <major-form :majors="majors"
-    :years="years"/>
-    <add-course @add:course="addCourse"/>
-    <road 
-    :semesters="semesters" 
-    :majors="majors" 
-    @remove:course="removeCourse"
+    <left-sidebar/>
+    <scroll-body
+          :years="years"
+          :semesters="semesters" 
+          :majors="majors" 
+          @remove:course="removeCourse"
     />
     <constraint-sidebar/>
   </div>
 </template>
 
 <script>
-import MajorForm from '@/components/MajorForm.vue'
-import AddCourse from '@/components/AddCourse.vue'
-import Road from '@/components/Road.vue'
+
 import ConstraintSidebar from '@/components/ConstraintSidebar.vue'
+import LeftSidebar from '@/components/LeftSidebar.vue'
+import ScrollBody from '@/components/ScrollBody.vue'
 
 export default {
   name: 'App',
   components: {
-    MajorForm,
-    AddCourse,
-    Road,
-    ConstraintSidebar
+    ConstraintSidebar,
+    LeftSidebar,
+    ScrollBody
   },
   data() {
     return {
@@ -38,16 +35,15 @@ export default {
     }
   },
   methods: {
-    // addCourse(courseName) {
-    //   const lastId = this.courses.length > 0
-    //     ? this.courses[this.courses.length - 1].id
-    //     : 0;
-    //   const id = lastId + 1;
-    //   const newCourse = { ...courseName, id };
-    //   this.courses = [...this.courses, newCourse];
-    // }
     addCourse(course) {
-      this.semesters[course.sem].push(course.name);
+      for(let i = 0; i < this.semesters[course.sem].length; i++) {
+        let c = this.semesters[course.sem][i];
+        if (course.name == c.name) {
+          return;
+        }
+      }
+      this.semesters[course.sem].push({name: course.name});
+      console.log(this.semesters[course.sem]);
     },
 
     removeCourse: function(course) {
@@ -59,12 +55,16 @@ export default {
 </script>
 
 <style>
+
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+  margin-top: 20px;
+  margin-left: 20px;
+  display:flex;
+  height:100vh;
 }
 </style>
