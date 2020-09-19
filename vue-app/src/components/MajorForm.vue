@@ -3,22 +3,43 @@
 <template>
   <div id="major-form">
     <form>
-      <label>What is your course?</label>
-      <input 
-        type="text"
-        v-model="major"
-      />
-      <button>Submit</button>
+      <div class="select">
+        <label>What is your course?</label>
+        <select v-model="major" onchange="validateDropdown(this)">
+          <option disabled value="">Course</option>
+          <option v-for="major in majors" :key="major.id" :value="major">{{ major.value }}</option>
+        </select>
+      </div>
+      <div class="select">
+        <label>What is your expected graduation year?</label>
+        <select v-model="year">
+          <option disabled value="">Year</option>
+          <option v-for="year in years" :key="year.id" :value="year">{{ year.value }}</option>
+        </select>
+      </div>
+      <button class="submit">Submit</button>
     </form>
+
   </div>
 </template>
 
 <script>
   export default {
     name: 'major-form',
+    props: ['years','majors'],
     data() {
       return {
-        major: ''
+        major: '',
+        year: ''
+      }
+    },
+    methods: {
+      selectYear(year) {
+        this.year = year.value;
+      },
+       validateDropDown(dd){
+        var input = document.getElementById('seedoc')
+        if(dd.value == '') input.disabled = true; else input.disabled = false;
       }
     }
   }
@@ -27,5 +48,16 @@
 <style scoped>
   form {
     margin-bottom: 2rem;
+  }
+  label {
+    display: block;
+  }
+  .select {
+    display: block;
+    margin-bottom: 1rem;
+  }
+  .submit{
+    display: block;
+    margin:auto;
   }
 </style>
