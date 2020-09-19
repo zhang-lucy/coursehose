@@ -3,7 +3,7 @@
 <template>
   <div id="major-form">
     <form>
-      <label>What is your course?</label>
+      <label>What is your major?</label>
       <input 
         type="text"
         v-model="major"

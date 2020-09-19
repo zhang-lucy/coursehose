@@ -3,7 +3,7 @@
     <h1>CourseHose</h1>
     <major-form />
     <add-course @add:course="addCourse"/>
-    <road :courses="courses"/>
+    <road :semesters="semesters"/>
 
   </div>
 </template>
@@ -22,31 +22,41 @@ export default {
   },
   data() {
     return {
-        courses: [
-            {
-            id: 1,
-            name: '6.009',
-            },
-            {
-            id: 2,
-            name: '18.404',
-            },
-            {
-            id: 3,
-            name: '22.09',
-            },
-        ],
-        major: 0
+      semesters: { // TODO remove hardcode later
+        f20: [],
+        s21: [],
+      },
+      // courses: [
+      //     {
+      //     id: 1,
+      //     name: '6.009',
+      //     sem: 'Fall 2020',
+      //     },
+      //     {
+      //     id: 2,
+      //     name: '18.404',
+      //     sem: 'Fall 2020',
+      //     },
+      //     {
+      //     id: 3,
+      //     name: '22.09',
+      //     sem: 'Fall 2020',
+      //     },
+      // ],
+      major: 0
     }
   },
   methods: {
-    addCourse(courseName) {
-      const lastId = this.courses.length > 0
-        ? this.courses[this.courses.length - 1].id
-        : 0;
-      const id = lastId + 1;
-      const newCourse = { ...courseName, id };
-      this.courses = [...this.courses, newCourse];
+    // addCourse(courseName) {
+    //   const lastId = this.courses.length > 0
+    //     ? this.courses[this.courses.length - 1].id
+    //     : 0;
+    //   const id = lastId + 1;
+    //   const newCourse = { ...courseName, id };
+    //   this.courses = [...this.courses, newCourse];
+    // }
+    addCourse(course) {
+      this.semesters[course.sem].push(course.name);
     }
   }
 }
