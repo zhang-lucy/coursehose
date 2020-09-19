@@ -2,10 +2,15 @@
 
 ## 1. Installation  
 (might be slightly off oops)
-`cd vue-app`  
-`npm install` 
-`npm i -g @vue/cli @vue/cli-service-global`  
+
+Go into the correct directory: `cd vue-app`  
+
+Install packages: `npm install`  
+
+Install Vue CLI: `npm i -g @vue/cli @vue/cli-service-global`  
 `yarn global add @vue/cli @vue/cli-service-global`
+
+Start the server:
 `yarn serve`  
 
 ### Vue Devtools:  
