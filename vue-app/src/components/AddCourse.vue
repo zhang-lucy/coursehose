@@ -9,15 +9,6 @@
         :class="{ 'has-error': submitting && invalidName }"
         v-model="course.name"
       >
-      <!-- TODO -->
-      <!-- <p
-        v-if="error && submitting"
-        class="error-message"
-      >❗Please fill out all required fields</p> 
-      <p
-        v-if="success"
-        class="success-message"
-      >✅ Course successfully added</p>-->
       <button>Submit</button>
     </form>
   </div>

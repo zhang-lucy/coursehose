@@ -1,7 +1,8 @@
 <template>
   <div id="app" class="small-container">
     <h1>CourseHose</h1>
-    <major-form />
+    <major-form :majors="majors"
+    :years="years"/>
     <add-course @add:course="addCourse"/>
     <road :courses="courses"/>
 
@@ -22,6 +23,7 @@ export default {
   },
   data() {
     return {
+        // TODO: Unhardcode  
         courses: [
             {
             id: 1,
@@ -36,7 +38,8 @@ export default {
             name: '22.09',
             },
         ],
-        major: 0
+        majors: [{id: 0, value: "1"},{id: 1, value: "6"},{id: 2, value: "18"}],
+        years: [{id: 0, value: 2021},{id: 1, value: 2022},{id: 2, value: 2023},{id: 3, value: 2024}]
     }
   },
   methods: {
