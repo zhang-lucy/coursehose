@@ -1,9 +1,13 @@
-def get_prereqs(major):
+def get_major_prereqs(major):
 	# idk????? smth to do w fireroad api?????
 	# currently assuming this just returns a list of classes but unsure how to handle weird cases 
 	# (and most things are weird cases)
 	prereqs = {}
 	return prereqs
+
+def get_minor_prereqs(minor):
+	# ignore minors for now
+	return {}
 
 def get_prereqs(course):
 	# also sth to do with the fireroad api/our backend??
@@ -24,7 +28,7 @@ def find_schedule(majors, minors, start_semester, end_semester = start_semester 
 	# existing_schedule is a dict from sem number to class we want to hardcode taking that sem
 	# start_semester is the "current" semester
 	general_prereqs = get_prereqs("GIRS") #or sth girs hardcoded rn but maybe figure better out later
-	major_prereqs = get_prereqs(major)
+	major_prereqs = get_major_prereqs(major)
 
 	low = 0
 	high = 1000
