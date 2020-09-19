@@ -3,23 +3,7 @@
 <head>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-
-    <style>
-        .course {
-            width: 20%;
-            background: blue;
-            color: white;
-            border-radius: 10px;
-            margin: 10px;
-            padding: 10px;
-        }
-        .larger {
-            font-size: 25px;
-        }
-        .smaller {
-            font-size: 20px;
-        }
-    </style>
+    <link rel="stylesheet" href="css/app.css">
 </head>
 <body>
     <div id="app">
@@ -27,7 +11,7 @@
     </div>
     <div id="courses">
         <form id="addCourseForm" v-on:submit.prevent="addCourse">
-            <input type="number" step=".0001" id="courseNumber">
+            <input type="text" id="courseNumber">
             <button type="submit">Add Course</button>
         </form>
 
