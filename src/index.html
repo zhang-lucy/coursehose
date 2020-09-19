@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+</head>
+<body>
+    <div id="app">
+        {{ message }}
+    </div>
+    <div id="courses">
+        <form id="addCourseForm" v-on:submit.prevent="addCourse">
+            <input type="text" id="courseNumber">
+            <button type="submit">Add Course</button>
+        </form>
+
+        <li v-for="course in courseList">
+            {{ course }}
+        </li>
+    </div>
+
+    <script src="index.js"></script>
+    <script src="./components/course.js"></script>
+</body>
+</html>
