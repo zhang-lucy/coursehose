@@ -19,9 +19,7 @@
 <script>
   export default {
     name: 'road',
-    propsData: {
-        courses: 'Array',
-    }
+    props: ['courses']
   }
 </script>
 

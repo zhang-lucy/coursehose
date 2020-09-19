@@ -2,9 +2,8 @@
   <div id="app" class="small-container">
     <h1>CourseHose</h1>
     <major-form />
-    <add-course />
-    <road :courses="courses"   
-    />
+    <add-course @add:course="addCourse"/>
+    <road :courses="courses"/>
 
   </div>
 </template>
@@ -37,6 +36,17 @@ export default {
             name: '22.09',
             },
         ],
+        major: 0
+    }
+  },
+  methods: {
+    addCourse(courseName) {
+      const lastId = this.courses.length > 0
+        ? this.courses[this.courses.length - 1].id
+        : 0;
+      const id = lastId + 1;
+      const newCourse = { ...courseName, id };
+      this.courses = [...this.courses, newCourse];
     }
   }
 }

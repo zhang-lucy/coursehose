@@ -1,10 +1,13 @@
 <!-- TODO: Rename these files to something more meaningful -->
 
 <template>
-  <div id="course-form">
+  <div id="major-form">
     <form>
       <label>What is your course?</label>
-      <input type="text" />
+      <input 
+        type="text"
+        v-model="major"
+      />
       <button>Submit</button>
     </form>
   </div>
@@ -12,7 +15,12 @@
 
 <script>
   export default {
-    name: 'course-form',
+    name: 'major-form',
+    data() {
+      return {
+        major: ''
+      }
+    }
   }
 </script>
 

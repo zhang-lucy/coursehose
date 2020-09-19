@@ -39,7 +39,7 @@
     methods: {
       handleSubmit() {
         console.log("Added " + this.course.name + "!");
-        // this.$emit('add:course', this.course)
+        this.$emit('add:course', this.course)
       },
     }
   }
