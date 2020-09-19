@@ -1,6 +1,7 @@
 <template>
   <div id="app" class="small-container">
-    <h1>CourseHose</h1>
+    <!-- <h1>CourseHose</h1> -->
+    <h1><img src="./coursehose.jpg" style="height: 50px"></h1>
     <major-form :majors="majors"
     :years="years"/>
     <add-course @add:course="addCourse"/>
