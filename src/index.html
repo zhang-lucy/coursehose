@@ -3,6 +3,23 @@
 <head>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+
+    <style>
+        .course {
+            width: 20%;
+            background: blue;
+            color: white;
+            border-radius: 10px;
+            margin: 10px;
+            padding: 10px;
+        }
+        .larger {
+            font-size: 25px;
+        }
+        .smaller {
+            font-size: 20px;
+        }
+    </style>
 </head>
 <body>
     <div id="app">
@@ -10,16 +27,22 @@
     </div>
     <div id="courses">
         <form id="addCourseForm" v-on:submit.prevent="addCourse">
-            <input type="text" id="courseNumber">
+            <input type="number" step=".0001" id="courseNumber">
             <button type="submit">Add Course</button>
         </form>
 
-        <li v-for="course in courseList">
-            {{ course }}
-        </li>
+        <div v-for="course in courseList" class="course">
+            <div>
+                <button @click="deleteCourse(course)">x</button>
+                <span class = "larger">{{ course.number }} </span>
+                <span class = "smaller">{{ course.name }}</span>        
+            </div>
+
+        </div>
     </div>
 
     <script src="index.js"></script>
     <script src="./components/course.js"></script>
+    <script src="allClasses.js"></script>
 </body>
 </html>
