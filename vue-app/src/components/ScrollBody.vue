@@ -65,6 +65,7 @@ export default {
         },
         nextPage() {
             this.$emit('next:page');
+        },
         updateRoad(road) {
             this.$emit('update:road', road)
         }

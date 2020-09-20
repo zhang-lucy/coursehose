@@ -7,12 +7,9 @@
           :login_page="login_page"
           @add:course="addCourse"
           @remove:course="removeCourse"
-<<<<<<< HEAD
           @add:major="addMajor"
           @next:page="nextPage"
-=======
           @update:road="updateRoad"
->>>>>>> 3a47fce83e8955227f755a5c08bc0d3872fb6969
     />
     <constraint-sidebar/>
   </div>
@@ -52,7 +49,7 @@ export default {
     addCourse: function(course) {
       for(let i = 0; i < this.semesters[course.sem].length; i++) {
         let c = this.semesters[course.sem][i];
-        if (course.name.lower() == c.name.lower()) {
+        if (course.name == c.name) {
           return;
         }
       }
@@ -81,7 +78,7 @@ export default {
     nextPage: function() {
       console.log("next page!");
       this.login_page = false; // TODO: accomodate more pages
-
+    },
     updateRoad: function(road) {
       for (var semester in road) {
         this.semesters[semester] = road[semester];
