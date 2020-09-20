@@ -82,6 +82,6 @@
     background: pink;
   }
   #add-course {
-    visibility: hidden;
+    visibility: visible;
   }
 </style>

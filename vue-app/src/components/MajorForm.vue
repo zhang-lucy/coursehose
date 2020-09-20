@@ -2,7 +2,7 @@
 
 <template>
   <div id="major-form">
-    <form id="majorForm">
+    <form @submit.prevent="handleMajorSubmit" id="majorForm">
       <div class="select">
         <label>What is your major?</label>
         <select v-model="major" onchange="validateDropdown(this)">
@@ -19,7 +19,6 @@
       </div>
       <b-button variant="info" type="submit" form="majorForm">Submit</b-button>
     </form>
-
   </div>
 </template>
 
@@ -37,9 +36,17 @@
       selectYear(year) {
         this.year = year.value;
       },
-       validateDropDown(dd){
-        var input = document.getElementById('seedoc')
-        if(dd.value == '') input.disabled = true; else input.disabled = false;
+      validateDropdown(){
+        // TODO
+        // var input = document.getElementById('seedoc')
+        // if(dd.value == '') input.disabled = true; else input.disabled = false;
+      },
+      handleMajorSubmit() {
+        console.log("Major: "+this.major.value+", Year: "+this.year.value);
+        this.$emit('add:major', this.major, this.year);
+        // this.major.value = '';
+        // this.year.value = '';
+        this.$emit('next:page');
       }
     }
   }
