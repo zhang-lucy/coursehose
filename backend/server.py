@@ -134,7 +134,7 @@ def find_schedule(majors, start_semester, end_semester = None, past_schedule = N
     # TODO: comment the next few lines back in when we are not testing
     # all_reqs = get_reqs("GIRS")
 
-    all_reqs = ["5.111", "7.012", "18.02", "8.02", "24.900", "24.917", "21M.301", "11.011", "21M.600", "6.046"]
+    all_reqs = ["5.111", "7.012", "18.02", "8.02", "6.0001", "24.900", "24.917", "21M.301", "11.011", "21M.600", "14.01", "14.03", "21.757"]
 
     # for m in majors:
     #     all_reqs.append(get_major_reqs(major))
