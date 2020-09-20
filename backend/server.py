@@ -16,14 +16,25 @@ def read_data_files(all_courses_file, major_reqs_file):
 
 def parse_condition(condition):
     if 'req' in condition:
-        return condition['req']
+        if condition.get('plain-string', False):
+            return []
+        return [condition['req']]
     reqs = []
     if condition['connection-type'] == 'all':
         for subcondition in condition['reqs']:
-            reqs.append(parse_condition(subcondition))
-        return (reqs, len(condition['reqs']),)
+            reqs.extend(parse_condition(subcondition))
+        return reqs
     elif condition['connection-type'] == 'any':
-        pass
+        if condition['threshold-desc'] in ('select either', 'select any'):
+            threshold = 1
+        else:
+            threshold = condition['threshold']['cutoff']
+        for subcondition in condition['reqs']:
+            reqs.extend(parse_condition(subcondition))
+            threshold -= 1
+            if threshold == 0:
+                break
+        return reqs
 
 
 
@@ -36,11 +47,10 @@ def get_major_reqs(major):
     # idk????? smth to do w fireroad api?????
     # currently assuming this just returns a list of classes but unsure how to handle weird cases
     # (and most things are weird cases)
-    reqs = {}
     req_dict = major_reqs[major]
+    reqs = []
     for condition in req_dict:
-        pass
-
+        reqs.extend(parse_condition(condition))
     return reqs
 
 
@@ -223,4 +233,5 @@ def find_schedule(majors, start_semester, end_semester = None, past_schedule = N
 
 if __name__ == "__main__":
     all_courses, major_reqs = read_data_files(all_courses_file, major_reqs_file)
-    print(find_schedule(0, 0))
+    # print(find_schedule(0, 0))
+    print(get_major_reqs("major6-3"))
