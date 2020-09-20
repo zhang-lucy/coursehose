@@ -43,12 +43,10 @@ export default {
       let allCourses = [];
       var courseItem;
       for (let i=0; i<courses.length; i++) {
-        if (courses[i].name in classes) {
+        if (courses[i].name in classes) { // TODO: Handle lowercase
           courseItem = {name: courses[i].name, title: classes[courses[i].name]['n']};
-        } else {
-          courseItem = {name: courses[i].name, title: "No Class Found"};
+          allCourses.push(courseItem);
         } 
-        allCourses.push(courseItem);
       }
       return allCourses;
     },
@@ -76,14 +74,18 @@ export default {
     color: #454545;
   }
   .course {
-    width: 15%;
-    background: teal;
+    width: 200px;
+    height: 125px;
+    font-size: 15px;
+    background: var(--course-color-1);
     color: white;
-    border-radius: 5px;
+    border: none;
     margin: 10px;
     padding: 10px;
     display: inline-block;
     vertical-align: middle;
+    overflow:scroll;
+    border-radius: 15px;
   }
   .larger {
     font-size: 20px;
@@ -96,9 +98,13 @@ export default {
     margin: auto;
     border-bottom: 2px solid black;
     width: 100%;
+    border-radius: 15px;
   }
   .semesterName {
     margin-top: 20px;
     font-size: 24px;
+  }
+  #road{
+    margin-top:0;
   }
 </style>

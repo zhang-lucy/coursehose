@@ -2,7 +2,7 @@
 
 <template>
   <div id="major-form">
-    <form id="majorForm">
+    <form @submit.prevent="handleMajorSubmit" id="majorForm">
       <div class="select">
         <label>What is your major?</label>
         <select v-model="major" onchange="validateDropdown(this)">
@@ -19,11 +19,11 @@
       </div>
       <b-button variant="info" type="submit" form="majorForm">Submit</b-button>
     </form>
-
   </div>
 </template>
 
 <script>
+  import { getRoad } from "../scripts/roadAPICall.js";
   export default {
     name: 'major-form',
     props: ['years','majors'],
@@ -37,9 +37,21 @@
       selectYear(year) {
         this.year = year.value;
       },
-       validateDropDown(dd){
-        var input = document.getElementById('seedoc')
-        if(dd.value == '') input.disabled = true; else input.disabled = false;
+      validateDropdown(){
+        // TODO
+        // var input = document.getElementById('seedoc')
+        // if(dd.value == '') input.disabled = true; else input.disabled = false;
+      },
+      handleMajorSubmit() {
+        console.log("Major: "+this.major.value+", Year: "+this.year.value);
+        this.$emit('add:major', this.major, this.year);
+        this.$emit('next:page');
+        var dummyEndpoint = "/getRoad" // TODO update with actual endpoint, also maybe need to incorporate year
+        var major = JSON.parse(JSON.stringify(this.major)); // weird bug with observables
+        var road = getRoad(dummyEndpoint, major);
+        this.$emit('update:road', road);
+        this.major.value = '';
+        this.year.value = '';
       }
     }
   }

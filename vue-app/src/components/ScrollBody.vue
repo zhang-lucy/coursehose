@@ -1,12 +1,17 @@
 <template>
     <div class="scroll-body" fixed="left">
-        <constraint-burger
-            v-if="login_page"
-        />
+        <h1 id="logo-container">
+            Coursehose
+        </h1>
         <major-form
             v-if="login_page"
             :years="years"
             :majors="majors" 
+            @next:page="nextPage"
+            @update:road="updateRoad"
+        />
+        <constraint-burger
+            v-if="!login_page"
         />
         <add-course
             v-if="!login_page"
@@ -18,7 +23,9 @@
             :semesters="semesters"
             @remove:course="removeCourse" 
         />
-        <footer style="margin-top: 50px">Made with &hearts; by Ashley Lin, Lucy Zhang, Melinda Sun, and Mindren Lu for HackMIT 2020. Email course-hose@mit.edu 
+        <footer style="margin-top: 50px"
+                v-if="!login_page"
+        >Made with &hearts; by Ashley Lin, Lucy Zhang, Melinda Sun, and Mindren Lu for HackMIT 2020. Email coursehose@mit.edu 
             for bugs or suggestions. Many thanks to 
             <a href="https://github.com/edfan/firehose">Firehose</a>, 
             <a href="https://github.com/sipb/courseroad2">Courseroad</a>, and 
@@ -31,7 +38,6 @@ import ConstraintBurger from '@/components/ConstraintBurger.vue'
 import MajorForm from '@/components/MajorForm.vue'
 import AddCourse from '@/components/AddCourse.vue'
 import Road from '@/components/Road.vue'
-// import { roadAPICall } from '@/scripts/roadAPICall.js'
 
 export default {
     name: "scroll-body",
@@ -39,6 +45,7 @@ export default {
         'years',
         'majors',
         'semesters',
+        'login_page'
     ],
     components: {
         ConstraintBurger,
@@ -52,6 +59,15 @@ export default {
         },
         removeCourse(course, semester) {
             this.$emit('remove:course', course, semester)
+        },
+        addMajor(major, year) {
+            this.$emit('add:major', major, year)
+        },
+        nextPage() {
+            this.$emit('next:page');
+        },
+        updateRoad(road) {
+            this.$emit('update:road', road)
         }
     }
 }
@@ -65,13 +81,18 @@ export default {
     font-size: 24px;
     }
     constraint-burger {
-        position: fixed;
-        
+        position: fixed;    
+    }
+    major-form {
+        margin-top: 40%;
     }
     .scroll-body {
         padding: 20px;
         flex: 80%;
         background: var(--background-color);
         overflow: auto;
+    }
+    #logo-container{
+
     }
 </style>

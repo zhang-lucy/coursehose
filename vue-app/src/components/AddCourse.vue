@@ -81,7 +81,4 @@
   select {
     background: pink;
   }
-  #add-course {
-    visibility: hidden;
-  }
 </style>
