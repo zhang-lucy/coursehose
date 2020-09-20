@@ -92,7 +92,4 @@ export default {
         background: var(--background-color);
         overflow: auto;
     }
-    #logo-container{
-
-    }
 </style>
