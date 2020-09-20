@@ -12,6 +12,10 @@
             :semesters="semesters"
             @remove:course="removeCourse" 
         />
+        <footer style="margin-top: 50px">Made by Ashley Lin, Lucy Zhang, Melinda Sun, and Mindren Lu for HackMIT 2020. Many thanks to 
+            <a href="https://github.com/edfan/firehose">Firehose</a>, 
+            <a href="https://github.com/sipb/courseroad2">Courseroad</a>, and 
+            <a href="https://github.com/venkatesh-sivaraman/FireRoad">Fireroad</a> for inspiration, data, and implementations.</footer>
     </div>
 </template>
 

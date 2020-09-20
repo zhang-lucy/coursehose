@@ -1,6 +1,6 @@
 <template>
   <div id="add-course">
-    <form @submit.prevent="handleSubmit">
+    <form @submit.prevent="handleSubmit" id="courseForm">
 
       <span>Add a course: </span>
       <input
@@ -20,7 +20,7 @@
         <option>Fall 2023</option>
         <option>Spring 2024</option>
       </select>
-      <b-button variant="info" style="margin-left: 15px">Submit</b-button>
+      <b-button variant="info" style="margin-left: 15px" form="courseForm" type="submit">Submit</b-button>
     </form>
   </div>
 </template>

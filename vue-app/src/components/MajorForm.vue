@@ -2,7 +2,7 @@
 
 <template>
   <div id="major-form">
-    <form>
+    <form id="majorForm">
       <div class="select">
         <label>What is your major?</label>
         <select v-model="major" onchange="validateDropdown(this)">
@@ -17,7 +17,7 @@
           <option v-for="year in years" :key="year.id" :value="year">{{ year.value }}</option>
         </select>
       </div>
-      <b-button variant="info" class="submit">Submit</b-button>
+      <b-button variant="info" type="submit" form="majorForm">Submit</b-button>
     </form>
 
   </div>
