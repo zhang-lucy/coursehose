@@ -57,6 +57,7 @@ def get_course_prereqs(course):
         prereq_str = prereq_str.replace(GIR, GIR_courses[GIR])
     prereq_str = re.sub("(.*)/''permission of instructor''", lambda x: x.group(1)[1:-1], prereq_str)
     prereq_str = re.sub("''Coreq: ([\w\.]*)''", lambda x: x.group(1), prereq_str)
+    prereq_str = re.sub(" ", "", prereq_str)
     prereq_str = re.sub("/", ",", prereq_str)
     prereq_str = re.sub(",", ",,", prereq_str)
     prereq_str = "[" + prereq_str + "]"
