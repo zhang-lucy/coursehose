@@ -1,10 +1,13 @@
 <template>
-    <b-navbar class="left-sidebar" fixed="left">
-        <h1><img src="../coursehose.jpg" style="height: 50px"></h1>
+    <div class="left-sidebar" fixed="left">
+        <div id="logo-container">
+            <img src="../coursehose.jpg" id="logo">
+        </div>
 
         <!-- <h2 id="big-title">CourseHose</h2> -->
         <constraint-burger/>
-    </b-navbar>
+    </div>
+    
 </template>
 
 <script>
@@ -22,14 +25,20 @@ export default {
         vertical-align: top;
         
     }
-    #big-title {
-    float:left;
-    font-size: 24px;
-    }
     .left-sidebar {
+        position: fixed;
         flex: 20%;
         background: green;
-        /* width: 100px;
-        height: 100vh; */
+        width: 400px;
+        height: 100vh;
+        padding: 20px;
+    }
+
+    #logo {
+        float: center;
+        width: 90%;        
+    }
+    #logo-container {
+        width:100%
     }
 </style>

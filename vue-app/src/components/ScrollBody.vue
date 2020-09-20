@@ -1,6 +1,5 @@
 <template>
     <div class="scroll-body" fixed="left">
-        hiwi
         <major-form
             :years="years"
             :majors="majors" 
@@ -26,7 +25,7 @@ export default {
         'majors',
         'semesters',
         {
-            addCourse: { type: Function },
+            "addCourse": { type: Function },
         }
 
     ],
@@ -51,6 +50,7 @@ export default {
     font-size: 24px;
     }
     .scroll-body {
+        padding: 20px;
         flex: 80%;
         background: pink;
         /* width: 50%;
