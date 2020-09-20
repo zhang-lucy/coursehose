@@ -6,25 +6,22 @@
         <draggable class="list-group row" :list="courses" group="g1"> 
 
           <!-- TODO I don't think the semester values change in App when you move them around tbh oops -->
-          <div v-for="course in getTitles(courses)" class="course list-group-item" :key="course.name" :style="isClicked ? { 'background-color': '#e6e6e6' } : null" @click="toggleIsClicked">
-            <div>
-                <button type="button" class="close-button" aria-label="Close" @click="handleDelete(course,semester)">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-                <span class="larger">{{ course.name }}</span><br>
-                <span class="smaller">{{ course.title }}</span>
-            </div>
-          </div>
+          <course-block v-for="course in getTitles(courses)" 
+          class="course list-group-item" 
+          :key="course.name" 
+          :courseName="course.name"
+          :courseTitle="course.title"
+          />
+
         </draggable>
         
       </div>
-        <!-- <rawDisplayer class="col-3" :value="courses" title="List 1" />  ????  -->
-        <!-- <rawDisplayer class="col-3" :value="list2" title="List 2" /> -->
     </div>
 </template>
 
 <script>
 import draggable from "@/../node_modules/vuedraggable";
+import CourseBlock from "@/components/CourseBlock.vue";
 import { classes } from "@/../data/allCourses.js";
 
 export default {
@@ -32,6 +29,7 @@ export default {
   display: "Road",
   order: 1,
   components: {
+    CourseBlock,
     draggable
   },
   props: ['semesters'],
@@ -64,9 +62,6 @@ export default {
         } 
       }
       return hours.toFixed(2);
-    },
-    toggleIsClicked: function () {
-      this.isClicked = !this.isClicked
     }
     // sample fields
     // "1.00": {"rating": 5.57, "gir_attribute": "REST", "has_final": false, "description": "Presents engineering problems in a computational setting with emphasis on data science and problem abstraction. Introduces modern development tools, patterns, and libraries for distributed-asynchronous computing, including distributed hash tables, Merkle trees, PKI encryption and zero knowledge proofs. Covers data cleaning and filtering, linear regression, and basic machine learning algorithms, such as clustering, classifiers, decision trees. Sharpens problem-solving skills in an active learning lab setting. In-class exercises and weekly assignments lead to a group project. Students taking graduate version complete additional assignments and project work.", "offered_fall": false, "offered_spring": true, "meets_with_subjects": ["1.001"], "instructors": ["J. Williams"], "out_of_class_hours": 7.95, "total_units": 12, "related_subjects": ["1.125", "1.124", "1.082", "1.95", "6.851", "1.000", "1.631", "1.063", "1.013", "1.142"], "pdf_option": false, "in_class_hours": 5.38, "is_half_class": false, "level": "U", "prerequisites": "GIR:CAL1", "subject_id": "1.00", "title": "Engineering Computation and Data Science", "lab_units": 2, "design_units": 0, "public": true, "offered_summer": false, "lecture_units": 3, "preparation_units": 7, "enrollment_number": 32.75, "url": "http://student.mit.edu/catalog/m1a.html#1.00", "is_variable_units": false, "offered_IAP": false}
@@ -86,20 +81,7 @@ export default {
     background: transparent;
     color: #454545;
   }
-  .course {
-    width: 200px;
-    height: 115px;
-    font-size: 15px;
-    background: var(--course-color-1);
-    color: white;
-    border: none;
-    margin: 10px;
-    padding: 8px;
-    display: inline-block;
-    vertical-align: middle;
-    overflow-y: scroll;
-    border-radius: 15px;
-  }
+
   .larger {
     font-size: 20px;
   }
