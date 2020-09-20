@@ -24,7 +24,6 @@
 
 <script>
   // import $ from 'jquery';
-  // import { getRoad } from "../scripts/roadAPICall.js";
   export default {
     name: 'major-form',
     props: ['years','majors'],
@@ -43,26 +42,35 @@
         // var input = document.getElementById('seedoc')
         // if(dd.value == '') input.disabled = true; else input.disabled = false;
       },
-      // updateRoad(data) {
-      //   this.$emit('update:road', data);
-      // },
       handleMajorSubmit() {
         console.log("Major: "+this.major.value+", Year: "+this.year.value);
         this.$emit('add:major', this.major, this.year);
         this.$emit('next:page');
 
-        // var dummyEndpoint = "/getRoad" // TODO update with actual endpoint, also maybe need to incorporate year
-        // var major = JSON.parse(JSON.stringify(this.major)); // weird bug with observables
-        // var year = JSON.parse(JSON.stringify(this.year));
-        // var road = getRoad(dummyEndpoint, major, year);
-        var data = {"Fall 2020": [{name: "6.0001"}], "Spring 2021": [{name: "6.0002"}]};
-        this.$emit('update:road', data);
-        // $.post("http://localhost:5000/apiCall", {'major': major})
-        //   .done(function(data) {
-        //     console.log(data);
-        //     updateRoad(data);
-        //   });
-        
+        var major = JSON.parse(JSON.stringify(this.major)); // weird bug with observables
+        var year = JSON.parse(JSON.stringify(this.year));
+        console.log(year);
+
+        // major: "sample road"
+        var maps = {"4: Architecture": {"Fall 2020": [{name: "2.00"}], "Spring 2021": [{name: "6.0002"}]}};
+        console.log(maps[major]);
+        this.$emit('update:road', maps[major]);
+
+        // TODO this is all broken and I spent too long on this and am crying a lot
+        // let self = this;
+        // $.post("http://localhost:5000/apiCall", {'major': major.value, 'year': year.value}, function(data) {
+        //   console.log(data);
+        //   // var newData = JSON.parse(JSON.stringify(data));
+        //   // console.log(newData);
+        //   // self.$emit('update:road', newData);
+          
+        //   var data2 = {"Fall 2020": [{name: "6.0001"}], "Spring 2021": [{name: "6.0002"}]};
+        //   self.$emit('update:road', data2);
+        // });
+
+        // var data = {"Fall 2020": [{name: "6.0001"}], "Spring 2021": [{name: "6.0002"}]};
+        // console.log(data);
+        // this.$emit('update:road', data);
       }
     }
   }

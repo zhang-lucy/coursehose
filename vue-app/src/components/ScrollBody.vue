@@ -67,6 +67,7 @@ export default {
             this.$emit('next:page');
         },
         updateRoad(road) {
+            console.log("sent to scroll body");
             this.$emit('update:road', road)
         }
     }
