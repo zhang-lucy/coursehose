@@ -20,8 +20,6 @@
 </template>
 
 <script>
-  // TODO: figure out why it's buggy
-  // import '../scripts/course'
   export default {
     name: 'add-course',
     props: ['semesters'],

@@ -8,14 +8,6 @@
           @add:course="addCourse"
           @remove:course="removeCourse"
     />
-    
-    <!-- <major-form :majors="majors"
-    :years="years"/>
-    <add-course @add:course="addCourse"/>
-    <road 
-    :semesters="semesters" 
-    :majors="majors" 
-    @remove:course="removeCourse" -->
     <constraint-sidebar/>
   </div>
 </template>
@@ -35,7 +27,7 @@ export default {
   },
   data() {
     return {
-      semesters: { // TODO remove hardcode later, also probably rewrite with Sets idk
+      semesters: { // TODO remove hardcode later, also probably rewrite with Sets idk jk use with sets not supported
         f20: [],
         s21: [],
       },
@@ -44,7 +36,7 @@ export default {
     }
   },
   methods: {
-    addCourse(course) {
+    addCourse: function(course) {
       for(let i = 0; i < this.semesters[course.sem].length; i++) {
         let c = this.semesters[course.sem][i];
         if (course.name == c.name) {
@@ -52,12 +44,16 @@ export default {
         }
       }
       this.semesters[course.sem].push({name: course.name});
-      console.log(this.semesters[course.sem]);
     },
 
-    removeCourse: function(course) {
-      const index = this.semesters[course.sem].indexOf(course);
-      this.semesters[course.sem].splice(index, 1);
+    removeCourse: function(course, semester) {
+      for(let i = 0; i < this.semesters[semester].length; i++) {
+        let c = this.semesters[semester][i];
+        if (course.name == c.name) {
+          this.semesters[semester].splice(i, 1);
+          return;
+        }
+      }
     },
   }
 }

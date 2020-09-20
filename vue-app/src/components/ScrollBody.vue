@@ -9,7 +9,9 @@
             :semesters="semesters" 
             @add:course="addCourse"
         />
-        <road :semesters="semesters" 
+        <road 
+            :semesters="semesters"
+            @remove:course="removeCourse" 
         />
     </div>
 </template>
@@ -25,10 +27,6 @@ export default {
         'years',
         'majors',
         'semesters',
-        {
-            addCourse: { type: Function },
-        }
-
     ],
     components: {
         MajorForm,
@@ -37,7 +35,10 @@ export default {
     },
     methods: {
         addCourse(course) {
-        this.$emit('add:course', course)
+            this.$emit('add:course', course)
+        },
+        removeCourse(course, semester) {
+            this.$emit('remove:course', course, semester)
         }
     }
 }
