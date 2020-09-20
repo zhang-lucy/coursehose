@@ -1,6 +1,6 @@
 <template>
     <b-navbar class="left-sidebar" fixed="left">
-        <h1><img src="./coursehose.jpg" style="height: 50px"></h1>
+        <h1><img src="../coursehose.jpg" style="height: 50px"></h1>
 
         <!-- <h2 id="big-title">CourseHose</h2> -->
         <constraint-burger/>

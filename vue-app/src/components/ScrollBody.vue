@@ -1,9 +1,16 @@
 <template>
     <div class="scroll-body" fixed="left">
         hiwi
-        <major-form/>
-        <add-course/>
-        <road/>
+        <major-form
+            :years="years"
+            :majors="majors" 
+        />
+        <add-course
+            :semesters="semesters" 
+            @add:course="addCourse"
+        />
+        <road :semesters="semesters" 
+        />
     </div>
 </template>
 
@@ -17,12 +24,21 @@ export default {
     props: [
         'years',
         'majors',
-        'semesters'
+        'semesters',
+        {
+            addCourse: { type: Function },
+        }
+
     ],
     components: {
         MajorForm,
         AddCourse,
         Road
+    },
+    methods: {
+        addCourse(course) {
+        this.$emit('add:course', course)
+        }
     }
 }
 </script>

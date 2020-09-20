@@ -5,10 +5,9 @@
           :years="years"
           :semesters="semesters" 
           :majors="majors" 
+          @add:course="addCourse"
           @remove:course="removeCourse"
     />
-
-
     
     <!-- <major-form :majors="majors"
     :years="years"/>
