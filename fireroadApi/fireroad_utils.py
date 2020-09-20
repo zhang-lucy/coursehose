@@ -34,6 +34,15 @@ def major_sort_key(title):
 		return '0' + title.replace(":", " ")
 	return title.replace(":", " ")
 
+def get_all_courses():
+	link = "https://fireroad.mit.edu/courses/all?full=true"
+	courses = requests.get(link).json()
+	courses_dict = {}
+	for course_info in courses:
+		courses_dict[course_info['subject_id']] = course_info
+	return courses_dict
+
+
 def save(data, file_name):
 	with open(file_name, 'w') as f:
 		json.dump(data, f)
@@ -42,7 +51,9 @@ def save(data, file_name):
 if __name__ == "__main__":
 	# course_id = input("Enter course id: ")
 	# print(get_course_requirements(course_id))
-	major_reqs = get_all_course_requirements()
-	save(major_reqs, "../data/course_requirements.json")
-	major_titles = get_all_major_titles()
-	save(major_titles, "../data/major_titles.json")
+	# major_reqs = get_all_course_requirements()
+	# save(major_reqs, "../data/course_requirements.json")
+	# major_titles = get_all_major_titles()
+	# save(major_titles, "../data/major_titles.json")
+	all_courses = get_all_courses()
+	save(all_courses, "../data/allCourses.json")

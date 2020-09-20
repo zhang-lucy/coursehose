@@ -74,45 +74,110 @@ def find_offerings(course, start_semester, end_semester):
     semesters = []
     return semesters
 
+def find_next_offering(course, start_semester):
+    return start_semester
 
 def find_schedule(majors, minors, start_semester, end_semester = None, past_schedule = {}, existing_schedule = {}, cost_function = "classes"):
     # can prob just assume semesters are numbered as 2*(year - 2000) + (1 if fall) or sth
     # past_schedule is a dict from sem number to class we hardcode taking that sem
     # existing_schedule is a dict from sem number to class we want to hardcode taking that sem
     # start_semester is the "current" semester
+    # for now let's just assume we minimize classes
 
     if end_semester == None:
         end_semester = start_semester + 7
 
-    all_reqs = get_reqs("GIRS") #or sth girs hardcoded rn but maybe figure better out later
+    # TODO: comment the next few lines back in when we are not testing
+    # all_reqs = get_reqs("GIRS")
 
-    for m in majors:
-        all_reqs.append(get_major_reqs(major))
+    # for m in majors:
+    #     all_reqs.append(get_major_reqs(major))
 
-    for m in minors:
-        all_reqs.append(get_major_reqs(major))
+    # for m in minors:
+    #     all_reqs.append(get_major_reqs(major))
 
-    all_reqs = list(set(all_reqs)) # idk but there's probably duplicates or sth???
+    all_reqs = ["6.046", "6.852", "6.031"]
 
-    prereqs = {}
-    for course in all_reqs:
-        course_prereqs = get_course_prereqs(course)
-        for c in course_prereqs:
-            if c in past_schedule:
-                continue
-            if not c in all_reqs:
-                all_reqs.append(c)
-            prereqs.add((c, course))
+    new_reqs = list(set(all_reqs)) # idk but there's probably duplicates or sth???
+    all_reqs = []
 
-    low = 0
-    high = 1000
-    currMidSchedule = None
+    prereqs = {} # maps course to a list of all its prereqs
 
-    while (high - low > 1):
-        # binary search, maybe refactor later to pass to other fn
-        mid = (low + high) / 2
-        if ()
+    while (len(new_reqs) > 0):
+        next_new_reqs = []
+        print(new_reqs, "help")
+        for course in new_reqs:
+            all_reqs.append(course)
+            prereqs[course] = []
+            course_prereqs = get_prereqs(course)
+            print("123", course_prereqs)
+            for prereq in course_prereqs:
+                print("here", course, prereq)
+                if prereq in past_schedule:
+                    continue
+                if not (prereq in all_reqs or prereq in new_reqs):
+                    next_new_reqs.append(prereq)
+                print(course, prereqs[course])
+                prereqs[course].append(prereq)
+                print(prereqs[course])
+                print("")
+        new_reqs = next_new_reqs
+
+    levels = []
+    levels.append(all_reqs)
+
+    curr_level = 0
+
+    while len(levels[curr_level]) > 0:
+        curr_level_courses = levels[curr_level]
+        next_level = []
+
+        for course in curr_level_courses:
+            for prereq in prereqs[course]:
+                if not prereq in next_level:
+                    next_level.append(prereq)
+
+        levels.append(next_level)
+
+        for course in next_level:
+            levels[curr_level].remove(course)
+
+        curr_level += 1
+
+    level_lookup = {}
+    for level in levels:
+        for course in level:
+            level_lookup[course] = level
+
+    ans = {}
+
+    for i in range(start_semester, end_semester + 1):
+        ans[i] = []
+
+    # added = []
+
+    # assume existing_schedule is sorted, btw idk how to sort a dictionary but can add code later
+    # also assume that none of these are terrible or sth
+    # for sem in existing_schedule:
+    #     sem_courses = existing_schedule[sem]
+    #     for course in sem_courses:
+    #         ans[sem].append(course)
+    #         course_prereqs = get_prereqs(course)
+    #         for prereq in course_prereqs:
+
+    # temporarily assume four classes a semester, later can "binary search" or sth
+    curr_semester = start_semester
+
+    for i in range(curr_level - 1, -1, -1):
+        level_courses = levels[i]
+        for course in level_courses:
+            if len(ans[curr_semester]) >= 4:
+                curr_semester += 1
+            next_offering = find_next_offering(course)
+            ans[next_offering].append(course)
+
+    return ans
 
 if __name__ == "__main__":
     all_courses, major_reqs = read_data_files(all_courses_file, major_reqs_file)
-    print(get_prereqs("9.016"))
+    print(find_schedule(0, 0, 0, 0))
