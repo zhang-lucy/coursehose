@@ -50,8 +50,6 @@
         var major = JSON.parse(JSON.stringify(this.major)); // weird bug with observables
         var road = getRoad(dummyEndpoint, major);
         this.$emit('update:road', road);
-        this.major.value = '';
-        this.year.value = '';
       }
     }
   }

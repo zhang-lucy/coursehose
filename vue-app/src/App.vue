@@ -11,7 +11,11 @@
           @next:page="nextPage"
           @update:road="updateRoad"
     />
-    <constraint-sidebar/>
+    <constraint-sidebar
+      :majors="majors" 
+      @add:major="addMajor"
+
+    />
   </div>
 </template>
 
@@ -101,12 +105,13 @@ export default {
   height:100vh;
   --background-color: #ecf4f3;
   --text-color-main: #006a71;
+  --select-color: #e0ece4;
   --course-color-1: #a37eba;
   --course-color-2: #e5df88;
 
 }
   select {
-    background: pink;
+    background: var(--select-color);
     padding: 5px;
     border-radius: 3px;
   }

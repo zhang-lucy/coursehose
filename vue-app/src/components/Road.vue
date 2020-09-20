@@ -8,7 +8,7 @@
           <!-- TODO I don't think the semester values change in App when you move them around tbh oops -->
           <div v-for="course in getTitles(courses)" class="course list-group-item" :key="course.name">
             <div>
-                <button type="button" class="close" aria-label="Close" @click="handleDelete(course,semester)">
+                <button type="button" class="close-button" aria-label="Close" @click="handleDelete(course,semester)">
                   <span aria-hidden="true">&times;</span>
                 </button>
                 <span class="larger">{{ course.name }}</span><br>
@@ -66,11 +66,13 @@ export default {
 
 <style scoped>
   .close-button {
-    float: left;
+    float: right;
     border: none;
-    background: transparent;
+    color: white;
+    font-size: 20px;
   }
   .close-button:hover {
+    background: transparent;
     color: #454545;
   }
   .course {
