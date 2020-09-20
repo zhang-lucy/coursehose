@@ -2,8 +2,8 @@ import json
 import re
 import ast
 
-all_courses_file = "../data/allCourses.json"
-major_reqs_file = "../data/course_requirements.json"
+all_courses_file = "../vue-app/data/allCourses.json"
+major_reqs_file = "../vue-app/data/course_requirements.json"
 
 
 def read_data_files(all_courses_file, major_reqs_file):
@@ -16,14 +16,25 @@ def read_data_files(all_courses_file, major_reqs_file):
 
 def parse_condition(condition):
     if 'req' in condition:
-        return condition['req']
+        if condition.get('plain-string', False):
+            return []
+        return [condition['req']]
     reqs = []
     if condition['connection-type'] == 'all':
         for subcondition in condition['reqs']:
-            reqs.append(parse_condition(subcondition))
-        return (reqs, len(condition['reqs']),)
+            reqs.extend(parse_condition(subcondition))
+        return reqs
     elif condition['connection-type'] == 'any':
-        pass
+        if condition['threshold-desc'] in ('select either', 'select any'):
+            threshold = 1
+        else:
+            threshold = condition['threshold']['cutoff']
+        for subcondition in condition['reqs']:
+            reqs.extend(parse_condition(subcondition))
+            threshold -= 1
+            if threshold == 0:
+                break
+        return reqs
 
 
 
@@ -36,17 +47,11 @@ def get_major_reqs(major):
     # idk????? smth to do w fireroad api?????
     # currently assuming this just returns a list of classes but unsure how to handle weird cases
     # (and most things are weird cases)
-    reqs = {}
     req_dict = major_reqs[major]
+    reqs = []
     for condition in req_dict:
-        pass
-
+        reqs.extend(parse_condition(condition))
     return reqs
-
-
-def get_minor_reqs(minor):
-    # ignore minors for now
-    return {}
 
 
 def get_course_prereqs(course):
@@ -62,6 +67,7 @@ def get_course_prereqs(course):
         prereq_str = prereq_str.replace(GIR, GIR_courses[GIR])
     prereq_str = re.sub("(.*)/''permission of instructor''", lambda x: x.group(1)[1:-1], prereq_str)
     prereq_str = re.sub("''Coreq: ([\w\.]*)''", lambda x: x.group(1), prereq_str)
+    prereq_str = re.sub(" ", "", prereq_str)
     prereq_str = re.sub("/", ",", prereq_str)
     prereq_str = re.sub(",", ",,", prereq_str)
     prereq_str = "[" + prereq_str + "]"
@@ -75,18 +81,41 @@ def find_offerings(course, start_semester, end_semester):
     # returns a list of all semester numbers this class will be offered
     # again vaguely sketchy, this time bc mit can be sketchy abt this
     # but we will just assume for now that generally actual prereqs are not that sketchy
-    semesters = []
+    semesters = list(range(start_semester, end_semester+1))
     course_info = all_courses[course]
-    if course_info['nx'] == "false":
-        semesters = [start_semester, start_semester+2]
+    if not course_info["offered_fall"]:
+        semesters = [semester for semester in semesters if semester % 2 == 0]
+        season = 1
+    elif not course_info["offered_spring"]:
+        semesters = [semester for semester in semesters if semester % 2 == 1]
+        season = 2
+    if "not-offered-year" in course_info:
+        excluded_semester = 2 * (course_info["not-offered-year"].split()[0] - 2000) + season
+        for i in range(excluded_semester, end_semester + 1, 2):
+            if i in semesters:
+                semesters.remove(i)
+
     return semesters
 
 
 def find_next_offering(course, start_semester):
-    return start_semester
+    current_season = start_semester % 2 + 1
+    course_info = all_courses[course]
+    if course_info["offered_fall"] and course_info["offered_spring"]:
+        return start_semester
+    elif course_info["offered_fall"]:
+        course_season = 1
+    else:
+        course_season = 2
+    offered_semester = start_semester + (current_season != course_season)
+    if "not-offered-year" in course_info:
+        excluded_semester = 2 * (course_info["not-offered-year"].split()[0] - 2000) + course_season
+        if offered_semester == excluded_semester:
+            offered_semester += 2
+    return offered_semester
 
 
-def find_schedule(majors, minors, start_semester, end_semester = None, past_schedule = None, existing_schedule = None, cost_function = "classes"):
+def find_schedule(majors, start_semester, end_semester = None, past_schedule = None, existing_schedule = None, cost_function = "classes"):
     # can prob just assume semesters are numbered as 2*(year - 2000) + (1 if fall) or sth
     # past_schedule is a dict from sem number to class we hardcode taking that sem
     # existing_schedule is a dict from sem number to class we want to hardcode taking that sem
@@ -105,13 +134,10 @@ def find_schedule(majors, minors, start_semester, end_semester = None, past_sche
     # TODO: comment the next few lines back in when we are not testing
     # all_reqs = get_reqs("GIRS")
 
+    all_reqs = ["5.111", "7.012", "18.02", "8.02", "24.900", "24.917", "21M.301", "11.011", "21M.600", "6.046"]
+
     # for m in majors:
     #     all_reqs.append(get_major_reqs(major))
-
-    # for m in minors:
-    #     all_reqs.append(get_major_reqs(major))
-
-    all_reqs = ["6.046", "6.852", "6.031"]
 
     new_reqs = list(set(all_reqs)) # idk but there's probably duplicates or sth???
     all_reqs = []
@@ -191,20 +217,34 @@ def find_schedule(majors, minors, start_semester, end_semester = None, past_sche
     # temporarily assume four classes a semester, later can "binary search" or sth
     curr_semester = start_semester
 
+    no_prereqs = []
+    for course in levels[0]:
+        if len(get_course_prereqs(course)) == 0:
+            no_prereqs.append(course)
+
+    for course in no_prereqs:
+        levels[0].remove(course)
+
     for i in range(curr_level - 1, -1, -1):
         # print("asjkshdj", i)
         level_courses = levels[i]
         # print("asjkshdj", level_courses)
         for course in level_courses:
-            if len(ans[curr_semester]) >= 4:
+            while len(ans[curr_semester]) >= 4:
                 curr_semester += 1
             next_offering = find_next_offering(course, curr_semester)
             # print("here", ans[next_offering])
             ans[next_offering].append(course)
             # print(ans[next_offering])
+        while len(no_prereqs) > 0 and len(ans[curr_semester]) < 4:
+            course = no_prereqs[0]
+            no_prereqs.remove(course)
+            ans[curr_semester].append(course)
+        curr_semester += 1
 
     return ans
 
 if __name__ == "__main__":
     all_courses, major_reqs = read_data_files(all_courses_file, major_reqs_file)
-    print(find_schedule(0, 0, 0))
+    # print(find_schedule(0, 0))
+    print(get_major_reqs("major6-3"))
