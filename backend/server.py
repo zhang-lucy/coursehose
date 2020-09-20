@@ -110,7 +110,6 @@ def find_next_offering(course, start_semester):
         course_season = 1
     else:
         course_season = 2
-    print(int(current_season != course_season))
     offered_semester = start_semester + (current_season != course_season)
     if "not-offered-year" in course_info:
         excluded_semester = 2 * (course_info["not-offered-year"].split()[0] - 2000) + course_season
@@ -242,7 +241,7 @@ def find_schedule(major, start_semester, end_semester = None, past_schedule = No
 
     for i in range(curr_level - 1, -1, -1):
         if (curr_semester > end_semester): 
-            return -1;
+            return -1
         # print("asjkshdj", i)
         level_courses = levels[i]
         # print("asjkshdj", level_courses)
@@ -250,7 +249,7 @@ def find_schedule(major, start_semester, end_semester = None, past_schedule = No
             while len(ans[curr_semester]) >= 4:
                 curr_semester += 1
                 if (curr_semester > end_semester): 
-                    return -1;
+                    return -1
             next_offering = find_next_offering(course, curr_semester)
             # print("here", ans[next_offering])
             ans[next_offering].append(course)
