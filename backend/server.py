@@ -115,7 +115,7 @@ def find_next_offering(course, start_semester):
     return offered_semester
 
 
-def find_schedule(majors, start_semester, end_semester = None, past_schedule = None, existing_schedule = None, cost_function = "classes"):
+def find_schedule(major, start_semester, end_semester = None, past_schedule = None, existing_schedule = None, cost_function = "classes"):
     # can prob just assume semesters are numbered as 2*(year - 2000) + (1 if fall) or sth
     # past_schedule is a dict from sem number to class we hardcode taking that sem
     # existing_schedule is a dict from sem number to class we want to hardcode taking that sem
@@ -134,10 +134,9 @@ def find_schedule(majors, start_semester, end_semester = None, past_schedule = N
     # TODO: comment the next few lines back in when we are not testing
     # all_reqs = get_reqs("GIRS")
 
-    all_reqs = ["5.111", "7.012", "18.02", "8.02", "6.0001", "24.900", "24.917", "21M.301", "11.011", "21M.600", "14.01", "14.03", "21.757"]
+    all_reqs = get_major_reqs(major)
 
-    # for m in majors:
-    #     all_reqs.append(get_major_reqs(major))
+    all_reqs.append(["5.111", "7.012", "18.02", "8.02", "24.900", "24.917", "21M.301", "11.011", "21M.600", "14.01", "14.03", "21W.757"])
 
     new_reqs = list(set(all_reqs)) # idk but there's probably duplicates or sth???
     all_reqs = []
@@ -246,5 +245,5 @@ def find_schedule(majors, start_semester, end_semester = None, past_schedule = N
 
 if __name__ == "__main__":
     all_courses, major_reqs = read_data_files(all_courses_file, major_reqs_file)
-    # print(find_schedule(0, 0))
-    print(get_major_reqs("major6-3"))
+    print(find_schedule("major20", 0))
+    #print(get_major_reqs("major20"))
