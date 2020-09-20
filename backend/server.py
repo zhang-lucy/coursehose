@@ -75,15 +75,38 @@ def find_offerings(course, start_semester, end_semester):
     # returns a list of all semester numbers this class will be offered
     # again vaguely sketchy, this time bc mit can be sketchy abt this
     # but we will just assume for now that generally actual prereqs are not that sketchy
-    semesters = []
+    semesters = list(range(start_semester, end_semester+1))
     course_info = all_courses[course]
-    if course_info['nx'] == "false":
-        semesters = [start_semester, start_semester+2]
+    if not course_info["offered_fall"]:
+        semesters = [semester for semester in semesters if semester % 2 == 0]
+        season = 1
+    elif not course_info["offered_spring"]:
+        semesters = [semester for semester in semesters if semester % 2 == 1]
+        season = 2
+    if "not-offered-year" in course_info:
+        excluded_semester = 2 * (course_info["not-offered-year"].split()[0] - 2000) + season
+        for i in range(excluded_semester, end_semester + 1, 2):
+            if i in semesters:
+                semesters.remove(i)
+
     return semesters
 
 
 def find_next_offering(course, start_semester):
-    return start_semester
+    current_season = start_semester % 2 + 1
+    course_info = all_courses[course]
+    if course_info["offered_fall"] and course_info["offered_spring"]:
+        return start_semester
+    elif course_info["offered_fall"]:
+        course_season = 1
+    else:
+        course_season = 2
+    offered_semester = start_semester + (current_season != course_season)
+    if "not-offered-year" in course_info:
+        excluded_semester = 2 * (course_info["not-offered-year"].split()[0] - 2000) + course_season
+        if offered_semester == excluded_semester:
+            offered_semester += 2
+    return offered_semester
 
 
 def find_schedule(majors, minors, start_semester, end_semester = None, past_schedule = None, existing_schedule = None, cost_function = "classes"):
