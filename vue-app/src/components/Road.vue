@@ -25,7 +25,7 @@
 
 <script>
 import draggable from "@/../node_modules/vuedraggable";
-import { classes } from "../scripts/allCourses.js";
+import { classes } from "@/../data/allCourses.js";
 
 export default {
   name: 'road',
@@ -44,7 +44,7 @@ export default {
       var courseItem;
       for (let i=0; i<courses.length; i++) {
         if (courses[i].name in classes) { // TODO: Handle lowercase
-          courseItem = {name: courses[i].name, title: classes[courses[i].name]['n']};
+          courseItem = {name: courses[i].name, title: classes[courses[i].name]['title']};
           allCourses.push(courseItem);
         } 
       }
@@ -54,10 +54,10 @@ export default {
       let hours = 0;
       for (let i=0; i<courses.length; i++) {
         if (courses[i].name in classes) {
-          hours += classes[courses[i].name]['h']
+          hours += classes[courses[i].name]["out_of_class_hours"] + classes[courses[i].name]["in_class_hours"];
         } 
       }
-      return hours.toFixed(1);
+      return hours.toFixed(2);
     }
   },
 }
