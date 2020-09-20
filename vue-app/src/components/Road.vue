@@ -2,21 +2,16 @@
   <div id="road">
       <div v-for="(courses, semester) in semesters" :key="semester">
         <h3 class="semesterName">{{ semester }}</h3>
-        <draggable class="list-group row" :list="courses" group="g1"> <!-- TODO I don't think the semester values change in App when you move them around tbh oops -->
-          <div v-for="course in courses" class="course list-group-item" :key="course.name">
+        <draggable class="list-group row" :list="courses" group="g1"> 
+
+          <!-- TODO I don't think the semester values change in App when you move them around tbh oops -->
+          <div v-for="course in getTitles(courses)" class="course list-group-item" :key="course.name">
             <div>
                 <button type="button" class="close" aria-label="Close" @click="handleDelete(course,semester)">
                   <span aria-hidden="true">&times;</span>
                 </button>
-                <!-- <span class = "larger">{{ course.name }} </span> -->
-                <!-- TODO attempt to add course names fix later need to access course.js -->
-                <!-- <span class = "smaller">{{ classes[course.name]['n'] }}</span>-->
-                <span class="smaller">{{ course.name }}</span>
-                <!-- if (course.toString() in classes) {
-                    courseItem = {number: course, name: classes[course.toString()]['n']};
-                } else {
-                    courseItem = {number: course, name: "No Class Found"};
-                } -->
+                <span class="larger">{{ course.name }}</span><br>
+                <span class="smaller">{{ course.title }}</span>
             </div>
           </div>
         </draggable>
@@ -29,6 +24,7 @@
 
 <script>
 import draggable from "@/../node_modules/vuedraggable";
+import { classes } from "../scripts/allCourses.js";
 
 export default {
   name: 'road',
@@ -41,6 +37,19 @@ export default {
   methods: {
     handleDelete(course, semester) {
       this.$emit('remove:course', course, semester);
+    },
+    getTitles(courses) {
+      let allCourses = [];
+      var courseItem;
+      for (let i=0; i<courses.length; i++) {
+        if (courses[i].name in classes) {
+          courseItem = {name: courses[i].name, title: classes[courses[i].name]['n']};
+        } else {
+          courseItem = {name: courses[i].name, title: "No Class Found"};
+        } 
+        allCourses.push(courseItem);
+      }
+      return allCourses;
     }
   },
 }
@@ -75,6 +84,7 @@ export default {
     display: block;
     margin: auto;
     border-bottom: 2px solid black;
+    width: 100%;
   }
   .semesterName {
     margin-top: 20px;
