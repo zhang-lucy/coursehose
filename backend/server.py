@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import json
 import re
 import ast
@@ -26,10 +25,10 @@ def parse_condition(condition):
 
 def get_major_reqs(major):
     '''
-	Give requirements for a major.
-	:param major: major code, e.g. 'major18pm'
-	:return: Requirements in an undetermined format?? {(course1, ... ): num_required}
-	'''
+    Give requirements for a major.
+    :param major: major code, e.g. 'major18pm'
+    :return: Requirements in an undetermined format?? {(course1, ... ): num_required}
+    '''
     # idk????? smth to do w fireroad api?????
     # currently assuming this just returns a list of classes but unsure how to handle weird cases
     # (and most things are weird cases)
@@ -77,40 +76,42 @@ def find_offerings(course, start_semester, end_semester):
 
 
 def find_schedule(majors, minors, start_semester, end_semester = None, past_schedule = {}, existing_schedule = {}, cost_function = "classes"):
-	# can prob just assume semesters are numbered as 2*(year - 2000) + (1 if fall) or sth
-	# past_schedule is a dict from sem number to class we hardcode taking that sem
-	# existing_schedule is a dict from sem number to class we want to hardcode taking that sem
-	# start_semester is the "current" semester
+    # can prob just assume semesters are numbered as 2*(year - 2000) + (1 if fall) or sth
+    # past_schedule is a dict from sem number to class we hardcode taking that sem
+    # existing_schedule is a dict from sem number to class we want to hardcode taking that sem
+    # start_semester is the "current" semester
 
-	if end_semester == None:
-		end_semester = start_semester + 7
+    if end_semester == None:
+        end_semester = start_semester + 7
 
-	all_reqs = get_reqs("GIRS") #or sth girs hardcoded rn but maybe figure better out later
+    all_reqs = get_reqs("GIRS") #or sth girs hardcoded rn but maybe figure better out later
 
-	for m in majors:
-		all_reqs.append(get_major_reqs(major))
+    for m in majors:
+        all_reqs.append(get_major_reqs(major))
 
-	for m in minors:
-		all_reqs.append(get_major_reqs(major))
+    for m in minors:
+        all_reqs.append(get_major_reqs(major))
 
-	all_reqs = list(set(all_reqs)) # idk but there's probably duplicates or sth???
+    all_reqs = list(set(all_reqs)) # idk but there's probably duplicates or sth???
 
-	prereqs = {}
-	for course in all_reqs:
-		course_prereqs = get_course_prereqs(course)
-		for c in course_prereqs:
-			if not c in all_reqs:
-				all_reqs.append(c)
-			prereqs.add((c, course))
+    prereqs = {}
+    for course in all_reqs:
+        course_prereqs = get_course_prereqs(course)
+        for c in course_prereqs:
+            if c in past_schedule:
+                continue
+            if not c in all_reqs:
+                all_reqs.append(c)
+            prereqs.add((c, course))
 
-	low = 0
-	high = 1000
-	currMidSchedule = None
+    low = 0
+    high = 1000
+    currMidSchedule = None
 
-	while (high - low > 1):
-		# binary search, maybe refactor later to pass to other fn
-		mid = (low + high) / 2
-		if ()
+    while (high - low > 1):
+        # binary search, maybe refactor later to pass to other fn
+        mid = (low + high) / 2
+        if ()
 
 if __name__ == "__main__":
     all_courses, major_reqs = read_data_files(all_courses_file, major_reqs_file)
