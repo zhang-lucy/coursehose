@@ -135,8 +135,9 @@ def find_schedule(major, start_semester, end_semester = None, past_schedule = No
     # all_reqs = get_reqs("GIRS")
 
     all_reqs = get_major_reqs(major)
+    print(all_reqs)
 
-    all_reqs.append(["5.111", "7.012", "18.02", "8.02", "24.900", "24.917", "21M.301", "11.011", "21M.600", "14.01", "14.03", "21W.757"])
+    all_reqs.extend(["5.111", "7.012", "18.02", "8.02", "24.900", "24.917", "21M.301", "11.011", "21M.600", "14.01", "14.03", "21W.757"])
 
     new_reqs = list(set(all_reqs)) # idk but there's probably duplicates or sth???
     all_reqs = []
@@ -245,5 +246,5 @@ def find_schedule(major, start_semester, end_semester = None, past_schedule = No
 
 if __name__ == "__main__":
     all_courses, major_reqs = read_data_files(all_courses_file, major_reqs_file)
-    print(find_schedule("major20", 0))
+    print(find_schedule("major6-3", 0))
     #print(get_major_reqs("major20"))
