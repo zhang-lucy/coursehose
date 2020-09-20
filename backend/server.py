@@ -2,8 +2,8 @@ import json
 import re
 import ast
 
-all_courses_file = "../data/allCourses.json"
-major_reqs_file = "../data/course_requirements.json"
+all_courses_file = "../vue-app/data/allCourses.json"
+major_reqs_file = "../vue-app/data/course_requirements.json"
 
 
 def read_data_files(all_courses_file, major_reqs_file):
@@ -42,11 +42,6 @@ def get_major_reqs(major):
         pass
 
     return reqs
-
-
-def get_minor_reqs(minor):
-    # ignore minors for now
-    return {}
 
 
 def get_course_prereqs(course):
