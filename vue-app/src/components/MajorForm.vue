@@ -23,7 +23,8 @@
 </template>
 
 <script>
-  import { getRoad } from "../scripts/roadAPICall.js";
+  // import $ from 'jquery';
+  // import { getRoad } from "../scripts/roadAPICall.js";
   export default {
     name: 'major-form',
     props: ['years','majors'],
@@ -37,21 +38,31 @@
       selectYear(year) {
         this.year = year.value;
       },
-      validateDropdown(){
+      validateDropdown() {
         // TODO
         // var input = document.getElementById('seedoc')
         // if(dd.value == '') input.disabled = true; else input.disabled = false;
       },
+      // updateRoad(data) {
+      //   this.$emit('update:road', data);
+      // },
       handleMajorSubmit() {
         console.log("Major: "+this.major.value+", Year: "+this.year.value);
         this.$emit('add:major', this.major, this.year);
         this.$emit('next:page');
 
-        var dummyEndpoint = "/getRoad" // TODO update with actual endpoint, also maybe need to incorporate year
-        var major = JSON.parse(JSON.stringify(this.major)); // weird bug with observables
-        var year = JSON.parse(JSON.stringify(this.year));
-        var road = getRoad(dummyEndpoint, major, year);
-        this.$emit('update:road', road);
+        // var dummyEndpoint = "/getRoad" // TODO update with actual endpoint, also maybe need to incorporate year
+        // var major = JSON.parse(JSON.stringify(this.major)); // weird bug with observables
+        // var year = JSON.parse(JSON.stringify(this.year));
+        // var road = getRoad(dummyEndpoint, major, year);
+        var data = {"Fall 2020": [{name: "6.0001"}], "Spring 2021": [{name: "6.0002"}]};
+        this.$emit('update:road', data);
+        // $.post("http://localhost:5000/apiCall", {'major': major})
+        //   .done(function(data) {
+        //     console.log(data);
+        //     updateRoad(data);
+        //   });
+        
       }
     }
   }

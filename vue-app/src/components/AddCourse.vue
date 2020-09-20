@@ -20,10 +20,7 @@
         <option>Fall 2023</option>
         <option>Spring 2024</option>
       </select>
-<<<<<<< HEAD
-=======
       
->>>>>>> 5a7ded151cc310355d2f6e88792de5099226452e
       <b-button variant="info" form="courseForm" type="submit">Submit</b-button>
     </form>
   </div>
