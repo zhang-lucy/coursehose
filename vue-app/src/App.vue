@@ -28,8 +28,14 @@ export default {
   data() {
     return {
       semesters: { // TODO remove hardcode later, also probably rewrite with Sets idk jk use with sets not supported
-        f20: [],
-        s21: [],
+        "Fall 2020": [],
+        "Spring 2021": [],
+        "Fall 2021": [],
+        "Spring 2022": [],
+        "Fall 2022": [],
+        "Spring 2023": [],
+        "Fall 2023": [],
+        "Spring 2024": [],
       },
       majors: [{id: 0, value: "1"},{id:1, value: "2"},{id: 2, value: "6-1"},{id: 3, value: "6-3"},{id: 4, value: "18"}],
       years: [{id: 0, value: 2021},{id: 1, value: 2022},{id: 2, value: 2023},{id: 3, value: 2024}]

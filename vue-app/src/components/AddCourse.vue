@@ -11,8 +11,8 @@
       >
       <select v-model="course.sem">
         <option disabled value="">Term</option>
-        <option>f20</option>
-        <option>s21</option>
+        <option>Fall 2020</option>
+        <option>Spring 2021</option>
       </select>
       <button>Submit</button>
     </form>

@@ -2,7 +2,7 @@
   <div id="road">
     <!-- <div class="row"> -->
       <div v-for="(courses, semester) in semesters" :key="semester">
-        <h3>{{ semester }}</h3>
+        <h3 class="semesterName">{{ semester }}</h3>
         <draggable class="list-group row" :list="courses" group="g1"> <!-- TODO I don't think the semester values change in App when you move them around tbh oops -->
           <div v-for="course in courses" class="course list-group-item" :key="course.name">
             <div>
@@ -68,5 +68,10 @@ export default {
   .row {
     display: block;
     margin: auto;
+    border-bottom: 2px solid black;
+  }
+  .semesterName {
+    margin-top: 20px;
+    font-size: 24px;
   }
 </style>
