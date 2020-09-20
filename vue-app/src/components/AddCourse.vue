@@ -7,12 +7,12 @@
         ref="first"
         type="text"
         placeholder="Course"
-        :class="{ 'has-error': submitting && invalidName }"
         v-model="course.name"
       >
       <select v-model="course.sem">
-        <option>f20</option>
-        <option>s21</option>
+        <option disabled value="">Term</option>
+        <option>Fall 2020</option>
+        <option>Spring 2021</option>
       </select>
       <button>Submit</button>
     </form>
@@ -20,10 +20,9 @@
 </template>
 
 <script>
-  // TODO: figure out why it's buggy
-  // import '../scripts/course'
   export default {
     name: 'add-course',
+    props: ['semesters'],
     data() {
       return {
         course: {
