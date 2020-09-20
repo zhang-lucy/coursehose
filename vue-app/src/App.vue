@@ -33,14 +33,14 @@ export default {
   data() {
     return {
       semesters: { // TODO remove hardcode later, also probably rewrite with Sets idk jk use with sets not supported
-        // "Fall 2020": [],
-        // "Spring 2021": [],
-        // "Fall 2021": [],
-        // "Spring 2022": [],
-        // "Fall 2022": [],
-        // "Spring 2023": [],
-        // "Fall 2023": [],
-        // "Spring 2024": [],
+        "Fall 2020": [],
+        "Spring 2021": [],
+        "Fall 2021": [],
+        "Spring 2022": [],
+        "Fall 2022": [],
+        "Spring 2023": [],
+        "Fall 2023": [],
+        "Spring 2024": [],
       },
       login_page: true,
       selected_majors: [],
