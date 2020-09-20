@@ -14,7 +14,7 @@ def read_data_files(all_courses_file, major_reqs_file):
     return all_courses, major_reqs
 
 
-def parse_condition(condition):
+def parse_condition(condition, threshold=None):
     if 'req' in condition:
         if condition.get('plain-string', False):
             return []
@@ -30,10 +30,10 @@ def parse_condition(condition):
         else:
             threshold = condition['threshold']['cutoff']
         for subcondition in condition['reqs']:
-            reqs.extend(parse_condition(subcondition))
-            threshold -= 1
             if threshold == 0:
                 break
+            reqs.extend(parse_condition(subcondition))
+            threshold -= 1
         return reqs
 
 
