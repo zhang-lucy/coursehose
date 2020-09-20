@@ -1,14 +1,14 @@
 <template>
   <div id="road">
-    <div class="row">
-      <div v-for="(courses, semester) in semesters" :key="semester.name">
-        <h3>{{ semester }}</h3>
-        <draggable class="list-group" :list="courses" group="g1">
+    <!-- <div class="row"> -->
+      <div v-for="(courses, semester) in semesters" :key="semester">
+        <h3 class="semesterName">{{ semester }}</h3>
+        <draggable class="list-group row" :list="courses" group="g1"> <!-- TODO I don't think the semester values change in App when you move them around tbh oops -->
           <div v-for="course in courses" class="course list-group-item" :key="course.name">
             <div>
-                <button @click="handleDelete(semester, course)">x</button>
+                <button @click="handleDelete(course, semester)">x</button>
                 <!-- <span class = "larger">{{ course.number }} </span> -->
-                <span class = "smaller">{{ course }}</span>        
+                <span class = "smaller">{{ course.name }}</span>        
             </div>
           </div>
         </draggable>
@@ -18,7 +18,7 @@
         <!-- <rawDisplayer class="col-3" :value="list2" title="List 2" /> -->
     </div>
 
-  </div>
+  <!-- </div> -->
 </template>
 
 <script>
@@ -33,8 +33,8 @@ export default {
   },
   props: ['semesters'],
   methods: {
-    handleDelete(semester, course) {
-      this.$emit('remove:course', {sem: semester, name: course});
+    handleDelete(course, semester) {
+      this.$emit('remove:course', course, semester);
     }
   },
 }
@@ -54,15 +54,24 @@ export default {
     width: 20%;
     background: teal;
     color: white;
-    border-radius: 10px;
+    border-radius: 5px;
     margin: 10px;
     padding: 10px;
     display: inline-block;
   }
   .larger {
-      font-size: 25px;
+    font-size: 25px;
   }
   .smaller {
-      font-size: 20px;
+    font-size: 20px;
+  }
+  .row {
+    display: block;
+    margin: auto;
+    border-bottom: 2px solid black;
+  }
+  .semesterName {
+    margin-top: 20px;
+    font-size: 24px;
   }
 </style>

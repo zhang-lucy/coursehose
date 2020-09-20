@@ -25,7 +25,7 @@
 
 <script>
   export default {
-    name: 'constraint-sidebar2'
+    name: 'constraint-sidebar'
   }
 </script>
 

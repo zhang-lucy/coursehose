@@ -8,14 +8,6 @@
           @add:course="addCourse"
           @remove:course="removeCourse"
     />
-    
-    <!-- <major-form :majors="majors"
-    :years="years"/>
-    <add-course @add:course="addCourse"/>
-    <road 
-    :semesters="semesters" 
-    :majors="majors" 
-    @remove:course="removeCourse" -->
     <constraint-sidebar/>
   </div>
 </template>
@@ -35,16 +27,22 @@ export default {
   },
   data() {
     return {
-      semesters: { // TODO remove hardcode later, also probably rewrite with Sets idk
-        f20: [],
-        s21: [],
+      semesters: { // TODO remove hardcode later, also probably rewrite with Sets idk jk use with sets not supported
+        "Fall 2020": [],
+        "Spring 2021": [],
+        "Fall 2021": [],
+        "Spring 2022": [],
+        "Fall 2022": [],
+        "Spring 2023": [],
+        "Fall 2023": [],
+        "Spring 2024": [],
       },
       majors: [{id: 0, value: "1"},{id:1, value: "2"},{id: 2, value: "6-1"},{id: 3, value: "6-3"},{id: 4, value: "18"}],
       years: [{id: 0, value: 2021},{id: 1, value: 2022},{id: 2, value: 2023},{id: 3, value: 2024}]
     }
   },
   methods: {
-    addCourse(course) {
+    addCourse: function(course) {
       for(let i = 0; i < this.semesters[course.sem].length; i++) {
         let c = this.semesters[course.sem][i];
         if (course.name == c.name) {
@@ -52,12 +50,16 @@ export default {
         }
       }
       this.semesters[course.sem].push({name: course.name});
-      console.log(this.semesters[course.sem]);
     },
 
-    removeCourse: function(course) {
-      const index = this.semesters[course.sem].indexOf(course);
-      this.semesters[course.sem].splice(index, 1);
+    removeCourse: function(course, semester) {
+      for(let i = 0; i < this.semesters[semester].length; i++) {
+        let c = this.semesters[semester][i];
+        if (course.name == c.name) {
+          this.semesters[semester].splice(i, 1);
+          return;
+        }
+      }
     },
   }
 }
