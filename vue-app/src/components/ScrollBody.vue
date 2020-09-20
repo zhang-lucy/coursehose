@@ -1,9 +1,11 @@
 <template>
     <div class="scroll-body" fixed="left">
-        <major-form
+        <constraint-burger/>
+        <!-- TODO: Move these to First Page -->
+        <!-- <major-form
             :years="years"
             :majors="majors" 
-        />
+        /> -->
         <add-course
             :semesters="semesters" 
             @add:course="addCourse"
@@ -16,7 +18,8 @@
 </template>
 
 <script>
-import MajorForm from '@/components/MajorForm.vue'
+import ConstraintBurger from '@/components/ConstraintBurger.vue'
+// import MajorForm from '@/components/MajorForm.vue'
 import AddCourse from '@/components/AddCourse.vue'
 import Road from '@/components/Road.vue'
 
@@ -28,7 +31,7 @@ export default {
         'semesters',
     ],
     components: {
-        MajorForm,
+        ConstraintBurger,
         AddCourse,
         Road
     },
@@ -50,10 +53,15 @@ export default {
     float:left;
     font-size: 24px;
     }
+    constraint-burger {
+        position: fixed;
+        
+    }
     .scroll-body {
         padding: 20px;
         flex: 80%;
-        background: pink;
+        background: var(--background-color);
+;
         /* width: 50%;
         height: 100vh; */
     }

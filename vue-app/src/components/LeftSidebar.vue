@@ -1,7 +1,7 @@
 <template>
     <div class="left-sidebar" fixed="left">
         <div id="logo-container">
-            <img src="../coursehose.jpg" id="logo">
+            <img src="../assets/coursehose.jpg" id="logo">
         </div>
 
         <!-- <h2 id="big-title">CourseHose</h2> -->

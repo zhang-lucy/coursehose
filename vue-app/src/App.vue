@@ -1,6 +1,6 @@
 <template>
   <div id="app" class="small-container">
-    <left-sidebar/>
+    <!-- <left-sidebar/> -->
     <scroll-body
           :years="years"
           :semesters="semesters" 
@@ -15,14 +15,14 @@
 <script>
 
 import ConstraintSidebar from '@/components/ConstraintSidebar.vue'
-import LeftSidebar from '@/components/LeftSidebar.vue'
+// import LeftSidebar from '@/components/LeftSidebar.vue'
 import ScrollBody from '@/components/ScrollBody.vue'
 
 export default {
   name: 'App',
   components: {
     ConstraintSidebar,
-    LeftSidebar,
+    // LeftSidebar,
     ScrollBody
   },
   data() {
@@ -75,5 +75,8 @@ export default {
   color: #2c3e50;
   display:flex;
   height:100vh;
+  --background-color: #ecf4f3;
+  --text-color-main: #006a71
+
 }
 </style>
