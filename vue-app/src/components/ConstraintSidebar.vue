@@ -6,14 +6,16 @@
           <v-expansion-panel>
             <v-expansion-panel-header>Add Major/Minor</v-expansion-panel-header>
             <v-expansion-panel-content>
-              To be implemented, adds options to add majors/minors.
-              <!-- <form @submit.prevent="handleMajorSubmit" id="majorForm">
+              Change major:
+              <form @submit.prevent="handleMajorSubmit" id="majorForm">
                 <div class="select">
                   <select v-model="major">
-                    <option disabled value="">First Major</option>
+                    <option disabled value="">Major</option>
                     <option v-for="major in majors" :key="major.id" :value="major">{{ major.value }}</option>
                   </select>
                 </div>
+              </form>
+                <!-- 
                 <div class="select">
                   <select v-model="major">
                     <option disabled value="">Second Major</option>
@@ -55,7 +57,7 @@
 <script>
   export default {
     name: 'constraint-sidebar',
-    props: ['majors'],
+    props: ['majors', 'selected_majors'],
     data() {
       return {
         'major': 0
