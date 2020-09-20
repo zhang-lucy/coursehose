@@ -1,20 +1,17 @@
 <template>
     <div class="scroll-body" fixed="left">
         <constraint-burger
-            v-if="login_page"
         />
         <major-form
-            v-if="login_page"
             :years="years"
-            :majors="majors" 
+            :majors="majors"
+            @update:road="updateRoad"
         />
         <add-course
-            v-if="!login_page"
             :semesters="semesters" 
             @add:course="addCourse"
         />
         <road 
-            v-if="!login_page"
             :semesters="semesters"
             @remove:course="removeCourse" 
         />
@@ -31,7 +28,6 @@ import ConstraintBurger from '@/components/ConstraintBurger.vue'
 import MajorForm from '@/components/MajorForm.vue'
 import AddCourse from '@/components/AddCourse.vue'
 import Road from '@/components/Road.vue'
-// import { roadAPICall } from '@/scripts/roadAPICall.js'
 
 export default {
     name: "scroll-body",
@@ -52,6 +48,9 @@ export default {
         },
         removeCourse(course, semester) {
             this.$emit('remove:course', course, semester)
+        },
+        updateRoad(road) {
+            this.$emit('update:road', road)
         }
     }
 }

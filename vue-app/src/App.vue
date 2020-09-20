@@ -7,6 +7,7 @@
           :login-page="login-page"
           @add:course="addCourse"
           @remove:course="removeCourse"
+          @update:road="updateRoad"
     />
     <constraint-sidebar/>
   </div>
@@ -60,6 +61,12 @@ export default {
         }
       }
     },
+
+    updateRoad: function(road) {
+      for (var semester in road) {
+        this.semesters[semester] = road[semester];
+      }
+    }
   }
 }
 </script>

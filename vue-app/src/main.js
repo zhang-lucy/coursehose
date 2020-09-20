@@ -6,6 +6,7 @@ import { VBTogglePlugin, BootstrapVue } from 'bootstrap-vue'
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 import vuetify from './plugins/vuetify';
+// import $ from 'jquery';
 
 Vue.use(VBTogglePlugin)
 Vue.use(BootstrapVue)
