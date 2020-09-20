@@ -125,7 +125,8 @@ def find_schedule(majors, minors, start_semester, end_semester = None, past_sche
                 # print("here", course, prereq)
                 if prereq in past_schedule:
                     continue
-                if not (prereq in all_reqs or prereq in new_reqs):
+                if not (prereq in all_reqs or prereq in next_new_reqs or prereq in new_reqs):
+                    # all_reqs.append(prereq)
                     next_new_reqs.append(prereq)
                 # print(course, prereqs[course])
                 prereqs[course].append(prereq)
@@ -149,8 +150,12 @@ def find_schedule(majors, minors, start_semester, end_semester = None, past_sche
 
         levels.append(next_level)
 
+        # print("dskfjsdhfldksf", curr_level, next_level, levels[curr_level])
+
         for course in next_level:
             levels[curr_level].remove(course)
+
+        # print("dskfjsdhfldksf", curr_level, next_level, levels[curr_level])
 
         curr_level += 1
 
@@ -179,9 +184,9 @@ def find_schedule(majors, minors, start_semester, end_semester = None, past_sche
     curr_semester = start_semester
 
     for i in range(curr_level - 1, -1, -1):
-        print("asjkshdj", i)
+        # print("asjkshdj", i)
         level_courses = levels[i]
-        print("asjkshdj", level_courses)
+        # print("asjkshdj", level_courses)
         for course in level_courses:
             if len(ans[curr_semester]) >= 4:
                 curr_semester += 1
