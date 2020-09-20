@@ -1,13 +1,13 @@
 <template>
   <div id="add-course">
     <form @submit.prevent="handleSubmit" id="courseForm">
-
       <span>Add a course: </span>
       <input
         ref="first"
         type="text"
         placeholder="Course"
-        v-model="course.name"
+        :value="course.name.toUpperCase()" 
+        @input="course.name = $event.target.value.toUpperCase()"
       >
       <select v-model="course.sem">
         <option disabled value="">Term</option>
@@ -20,28 +20,7 @@
         <option>Fall 2023</option>
         <option>Spring 2024</option>
       </select>
-    <!-- <v-menu open-on-hover bottom offset-y>
-      <template v-slot:activator="{ on, attrs }">
-        <v-btn
-          color="primary"
-          dark
-          v-bind="attrs"
-          v-on="on"
-        >
-          Term
-        </v-btn>
-      </template>
-
-      <v-list>
-        <v-list-item
-          v-for="semester in semesters.keys"
-          :key="semester"
-        >
-          <v-list-item-title>{{ semester }}</v-list-item-title>
-        </v-list-item>
-      </v-list>
-    </v-menu> -->
-
+      
       <b-button variant="info" form="courseForm" type="submit">Submit</b-button>
     </form>
   </div>

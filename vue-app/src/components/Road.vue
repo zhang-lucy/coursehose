@@ -59,6 +59,9 @@ export default {
       }
       return hours.toFixed(2);
     }
+    
+    // sample fields
+    // "1.00": {"rating": 5.57, "gir_attribute": "REST", "has_final": false, "description": "Presents engineering problems in a computational setting with emphasis on data science and problem abstraction. Introduces modern development tools, patterns, and libraries for distributed-asynchronous computing, including distributed hash tables, Merkle trees, PKI encryption and zero knowledge proofs. Covers data cleaning and filtering, linear regression, and basic machine learning algorithms, such as clustering, classifiers, decision trees. Sharpens problem-solving skills in an active learning lab setting. In-class exercises and weekly assignments lead to a group project. Students taking graduate version complete additional assignments and project work.", "offered_fall": false, "offered_spring": true, "meets_with_subjects": ["1.001"], "instructors": ["J. Williams"], "out_of_class_hours": 7.95, "total_units": 12, "related_subjects": ["1.125", "1.124", "1.082", "1.95", "6.851", "1.000", "1.631", "1.063", "1.013", "1.142"], "pdf_option": false, "in_class_hours": 5.38, "is_half_class": false, "level": "U", "prerequisites": "GIR:CAL1", "subject_id": "1.00", "title": "Engineering Computation and Data Science", "lab_units": 2, "design_units": 0, "public": true, "offered_summer": false, "lecture_units": 3, "preparation_units": 7, "enrollment_number": 32.75, "url": "http://student.mit.edu/catalog/m1a.html#1.00", "is_variable_units": false, "offered_IAP": false}
   },
 }
 

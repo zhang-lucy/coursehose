@@ -46,9 +46,11 @@
         console.log("Major: "+this.major.value+", Year: "+this.year.value);
         this.$emit('add:major', this.major, this.year);
         this.$emit('next:page');
+
         var dummyEndpoint = "/getRoad" // TODO update with actual endpoint, also maybe need to incorporate year
         var major = JSON.parse(JSON.stringify(this.major)); // weird bug with observables
-        var road = getRoad(dummyEndpoint, major);
+        var year = JSON.parse(JSON.stringify(this.year));
+        var road = getRoad(dummyEndpoint, major, year);
         this.$emit('update:road', road);
         this.major.value = '';
         this.year.value = '';
