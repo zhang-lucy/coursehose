@@ -112,25 +112,25 @@ def find_schedule(majors, minors, start_semester, end_semester = None, past_sche
 
     while (len(new_reqs) > 0):
         next_new_reqs = []
-        print(new_reqs, "help")
+        # print(new_reqs, "help")
         for course in new_reqs:
             all_reqs.append(course)
             prereqs[course] = []
             course_prereqs = get_course_prereqs(course)
-            print("123", course_prereqs)
+            # print("123", course_prereqs)
             for prereq in course_prereqs:
                 while not type(prereq) == str:
                     prereq = prereq[0]
-                    print("zkdjhsdjflkd", prereq)
-                print("here", course, prereq)
+                    # print("zkdjhsdjflkd", prereq)
+                # print("here", course, prereq)
                 if prereq in past_schedule:
                     continue
                 if not (prereq in all_reqs or prereq in new_reqs):
                     next_new_reqs.append(prereq)
-                print(course, prereqs[course])
+                # print(course, prereqs[course])
                 prereqs[course].append(prereq)
-                print(prereqs[course])
-                print("")
+                # print(prereqs[course])
+                # print("")
         new_reqs = next_new_reqs
 
     levels = []
@@ -179,14 +179,16 @@ def find_schedule(majors, minors, start_semester, end_semester = None, past_sche
     curr_semester = start_semester
 
     for i in range(curr_level - 1, -1, -1):
+        print("asjkshdj", i)
         level_courses = levels[i]
+        print("asjkshdj", level_courses)
         for course in level_courses:
             if len(ans[curr_semester]) >= 4:
                 curr_semester += 1
             next_offering = find_next_offering(course, curr_semester)
-            print("here", ans[next_offering])
+            # print("here", ans[next_offering])
             ans[next_offering].append(course)
-            print(ans[next_offering])
+            # print(ans[next_offering])
 
     return ans
 
