@@ -57,15 +57,17 @@ def get_major_reqs(major):
 def get_course_prereqs(course):
     # also sth to do with the fireroad api/our backend??
     # again will assume this just returns a nice list of prereqs even tho probably fake news
+    print(course)
     prereq_str = all_courses[course].get("prerequisites", "None")
     if prereq_str in ("None", "''Permission of instructor''"):
         return []
+    prereq_str = re.sub("(\(.*\))/''permission of instructor''", lambda x: x.group(1)[1:-1], prereq_str)
+    prereq_str = re.sub("/''permission of instructor''", "", prereq_str)
     GIR_courses = {"GIR:CAL1": "18.01", "GIR:CAL2": "(18.02, 18.022)", "GIR:PHY1": "(8.01, 8.01L, 8.012)",
-                   "GIR:PHY2": "(8.02, 8.022)", "GIR:BIO": "(7.012, 7.013, 7.014, 7.015, or 7.016)",
+                   "GIR:PHY2": "(8.02, 8.022)", "GIR:BIOL": "(7.012, 7.013, 7.014, 7.015, 7.016)",
                    "GIR:CHEM": "(3.091, 5.111, 5.112)"}
     for GIR in GIR_courses:
         prereq_str = prereq_str.replace(GIR, GIR_courses[GIR])
-    prereq_str = re.sub("(.*)/''permission of instructor''", lambda x: x.group(1)[1:-1], prereq_str)
     prereq_str = re.sub("''Coreq: ([\w\.]*)''", lambda x: x.group(1), prereq_str)
     prereq_str = re.sub(" ", "", prereq_str)
     prereq_str = re.sub("/", ",", prereq_str)
@@ -246,5 +248,5 @@ def find_schedule(major, start_semester, end_semester = None, past_schedule = No
 
 if __name__ == "__main__":
     all_courses, major_reqs = read_data_files(all_courses_file, major_reqs_file)
-    print(find_schedule("major6-3", 0))
-    #print(get_major_reqs("major20"))
+    #print(find_schedule("major6-3", 0))
+    print(find_schedule("major20", 41))
