@@ -84,6 +84,8 @@ export default {
     padding: 10px;
     display: inline-block;
     vertical-align: middle;
+    overflow:scroll;
+    border-radius: 15px;
   }
   .larger {
     font-size: 20px;
@@ -96,6 +98,7 @@ export default {
     margin: auto;
     border-bottom: 2px solid black;
     width: 100%;
+    border-radius: 15px;
   }
   .semesterName {
     margin-top: 20px;
