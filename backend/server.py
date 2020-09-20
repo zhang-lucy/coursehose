@@ -220,7 +220,7 @@ def find_schedule(majors, start_semester, end_semester = None, past_schedule = N
         level_courses = levels[i]
         # print("asjkshdj", level_courses)
         for course in level_courses:
-            if len(ans[curr_semester]) >= 4:
+            while len(ans[curr_semester]) >= 4:
                 curr_semester += 1
             next_offering = find_next_offering(course, curr_semester)
             # print("here", ans[next_offering])
@@ -230,6 +230,7 @@ def find_schedule(majors, start_semester, end_semester = None, past_schedule = N
             course = no_prereqs[0]
             no_prereqs.remove(course)
             ans[curr_semester].append(course)
+        curr_semester += 1
 
     return ans
 
