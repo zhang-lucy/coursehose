@@ -4,7 +4,6 @@
             <img src="../assets/coursehose.jpg" id="logo">
         </div>
 
-        <!-- <h2 id="big-title">CourseHose</h2> -->
         <constraint-burger/>
     </div>
     
@@ -28,9 +27,10 @@ export default {
     .left-sidebar {
         position: fixed;
         flex: 20%;
-        background: green;
+        background: #ebeff2;
         width: 400px;
-        height: 100vh;
+        /* height: 100vh; */
+        height: 20vh;
         padding: 20px;
     }
 

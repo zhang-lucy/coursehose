@@ -1,8 +1,8 @@
 <template>
   <div id="add-course">
-    <!-- <form @submit.prevent="handleSubmit">
+    <form @submit.prevent="handleSubmit" id="courseForm">
 
-      <label>Add a course: </label>
+      <span>Add a course: </span>
       <input
         ref="first"
         type="text"
@@ -13,14 +13,14 @@
         <option disabled value="">Term</option>
         <option>Fall 2020</option>
         <option>Spring 2021</option>
+        <option>Fall 2021</option>
+        <option>Spring 2022</option>
+        <option>Fall 2022</option>
+        <option>Spring 2023</option>
+        <option>Fall 2023</option>
+        <option>Spring 2024</option>
       </select>
-
-
-
-      <v-btn>Submit</v-btn>
-    </form> -->
-
-    <v-menu open-on-hover bottom offset-y>
+    <!-- <v-menu open-on-hover bottom offset-y>
       <template v-slot:activator="{ on, attrs }">
         <v-btn
           color="primary"
@@ -40,8 +40,10 @@
           <v-list-item-title>{{ semester }}</v-list-item-title>
         </v-list-item>
       </v-list>
-    </v-menu>
+    </v-menu> -->
 
+      <b-button variant="info" form="courseForm" type="submit">Submit</b-button>
+    </form>
   </div>
 </template>
 
@@ -60,7 +62,9 @@
     methods: {
       handleSubmit() {
         console.log("Added " + this.course.name + " in " + this.course.sem + "!");
-        // this.$emit('add:course', this.course)
+        this.$emit('add:course', this.course)
+        this.course.name = '';
+        this.course.sem = '';
       },
     }
   }
@@ -68,15 +72,11 @@
 </script>
 
 <style scoped>
+  button {
+    margin-left: 15px; 
+  }
   label {
     margin-right: 5px;
-  }
-  form {
-    margin-bottom: 2rem;
-  }
-  input {
-    background: white;
-    width: 100px;
   }
   select {
     background: pink;

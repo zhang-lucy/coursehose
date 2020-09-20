@@ -1,11 +1,10 @@
 <template>
     <div class="scroll-body" fixed="left">
         <constraint-burger/>
-        <!-- TODO: Move these to First Page -->
-        <!-- <major-form
+        <major-form
             :years="years"
             :majors="majors" 
-        /> -->
+        />
         <add-course
             :semesters="semesters" 
             @add:course="addCourse"
@@ -14,12 +13,17 @@
             :semesters="semesters"
             @remove:course="removeCourse" 
         />
+        <footer style="margin-top: 50px">Made with &hearts; by Ashley Lin, Lucy Zhang, Melinda Sun, and Mindren Lu for HackMIT 2020. Email course-hose@mit.edu 
+            for bugs or suggestions. Many thanks to 
+            <a href="https://github.com/edfan/firehose">Firehose</a>, 
+            <a href="https://github.com/sipb/courseroad2">Courseroad</a>, and 
+            <a href="https://github.com/venkatesh-sivaraman/FireRoad">Fireroad</a> for inspiration, data, and implementations.</footer>
     </div>
 </template>
 
 <script>
 import ConstraintBurger from '@/components/ConstraintBurger.vue'
-// import MajorForm from '@/components/MajorForm.vue'
+import MajorForm from '@/components/MajorForm.vue'
 import AddCourse from '@/components/AddCourse.vue'
 import Road from '@/components/Road.vue'
 
@@ -32,6 +36,7 @@ export default {
     ],
     components: {
         ConstraintBurger,
+        MajorForm,
         AddCourse,
         Road
     },
@@ -61,8 +66,6 @@ export default {
         padding: 20px;
         flex: 80%;
         background: var(--background-color);
-;
-        /* width: 50%;
-        height: 100vh; */
+        overflow: auto;
     }
 </style>

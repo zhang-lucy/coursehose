@@ -1,14 +1,18 @@
 <template>
   <div id="road">
-    <!-- <div class="row"> -->
       <div v-for="(courses, semester) in semesters" :key="semester">
         <h3 class="semesterName">{{ semester }}</h3>
-        <draggable class="list-group row" :list="courses" group="g1"> <!-- TODO I don't think the semester values change in App when you move them around tbh oops -->
-          <div v-for="course in courses" class="course list-group-item" :key="course.name">
+        <p>Total hours: {{ totalHours(courses) }}</p>
+        <draggable class="list-group row" :list="courses" group="g1"> 
+
+          <!-- TODO I don't think the semester values change in App when you move them around tbh oops -->
+          <div v-for="course in getTitles(courses)" class="course list-group-item" :key="course.name">
             <div>
-                <button @click="handleDelete(course, semester)">x</button>
-                <!-- <span class = "larger">{{ course.number }} </span> -->
-                <span class = "smaller">{{ course.name }}</span>        
+                <button type="button" class="close" aria-label="Close" @click="handleDelete(course,semester)">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+                <span class="larger">{{ course.name }}</span><br>
+                <span class="smaller">{{ course.title }}</span>
             </div>
           </div>
         </draggable>
@@ -17,12 +21,11 @@
         <!-- <rawDisplayer class="col-3" :value="courses" title="List 1" />  ????  -->
         <!-- <rawDisplayer class="col-3" :value="list2" title="List 2" /> -->
     </div>
-
-  <!-- </div> -->
 </template>
 
 <script>
 import draggable from "@/../node_modules/vuedraggable";
+import { classes } from "../scripts/allCourses.js";
 
 export default {
   name: 'road',
@@ -35,6 +38,28 @@ export default {
   methods: {
     handleDelete(course, semester) {
       this.$emit('remove:course', course, semester);
+    },
+    getTitles(courses) {
+      let allCourses = [];
+      var courseItem;
+      for (let i=0; i<courses.length; i++) {
+        if (courses[i].name in classes) {
+          courseItem = {name: courses[i].name, title: classes[courses[i].name]['n']};
+        } else {
+          courseItem = {name: courses[i].name, title: "No Class Found"};
+        } 
+        allCourses.push(courseItem);
+      }
+      return allCourses;
+    },
+    totalHours(courses) {
+      let hours = 0;
+      for (let i=0; i<courses.length; i++) {
+        if (courses[i].name in classes) {
+          hours += classes[courses[i].name]['h']
+        } 
+      }
+      return hours.toFixed(1);
     }
   },
 }
@@ -51,24 +76,26 @@ export default {
     color: #454545;
   }
   .course {
-    width: 20%;
+    width: 15%;
     background: teal;
     color: white;
     border-radius: 5px;
     margin: 10px;
     padding: 10px;
     display: inline-block;
+    vertical-align: middle;
   }
   .larger {
-    font-size: 25px;
+    font-size: 20px;
   }
   .smaller {
-    font-size: 20px;
+    font-size: 15px;
   }
   .row {
     display: block;
     margin: auto;
     border-bottom: 2px solid black;
+    width: 100%;
   }
   .semesterName {
     margin-top: 20px;
