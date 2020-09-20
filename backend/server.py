@@ -119,6 +119,9 @@ def find_schedule(majors, minors, start_semester, end_semester = None, past_sche
             course_prereqs = get_course_prereqs(course)
             print("123", course_prereqs)
             for prereq in course_prereqs:
+                while not type(prereq) == str:
+                    prereq = prereq[0]
+                    print("zkdjhsdjflkd", prereq)
                 print("here", course, prereq)
                 if prereq in past_schedule:
                     continue
@@ -180,11 +183,13 @@ def find_schedule(majors, minors, start_semester, end_semester = None, past_sche
         for course in level_courses:
             if len(ans[curr_semester]) >= 4:
                 curr_semester += 1
-            next_offering = find_next_offering(course)
+            next_offering = find_next_offering(course, curr_semester)
+            print("here", ans[next_offering])
             ans[next_offering].append(course)
+            print(ans[next_offering])
 
     return ans
 
 if __name__ == "__main__":
     all_courses, major_reqs = read_data_files(all_courses_file, major_reqs_file)
-    print(find_schedule(0, 0, 0, 0))
+    print(find_schedule(0, 0, 0))
