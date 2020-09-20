@@ -75,16 +75,16 @@ export default {
   }
   .course {
     width: 200px;
-    height: 125px;
+    height: 115px;
     font-size: 15px;
     background: var(--course-color-1);
     color: white;
     border: none;
     margin: 10px;
-    padding: 10px;
+    padding: 8px;
     display: inline-block;
     vertical-align: middle;
-    overflow:scroll;
+    overflow-y: scroll;
     border-radius: 15px;
   }
   .larger {
@@ -104,7 +104,7 @@ export default {
     margin-top: 20px;
     font-size: 24px;
   }
-  #road{
+  #road {
     margin-top:0;
   }
 </style>
