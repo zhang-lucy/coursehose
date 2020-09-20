@@ -101,7 +101,8 @@ def find_offerings(course, start_semester, end_semester):
 
 
 def find_next_offering(course, start_semester):
-    current_season = start_semester % 2 + 1
+    current_season = start_semester % 2
+    current_season = current_season + 2 if current_season == 0 else current_season
     course_info = all_courses[course]
     if course_info["offered_fall"] and course_info["offered_spring"]:
         return start_semester
@@ -109,6 +110,7 @@ def find_next_offering(course, start_semester):
         course_season = 1
     else:
         course_season = 2
+    print(int(current_season != course_season))
     offered_semester = start_semester + (current_season != course_season)
     if "not-offered-year" in course_info:
         excluded_semester = 2 * (course_info["not-offered-year"].split()[0] - 2000) + course_season
