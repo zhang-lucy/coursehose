@@ -61,7 +61,7 @@ def get_course_prereqs(course):
     for GIR in GIR_courses:
         prereq_str = prereq_str.replace(GIR, GIR_courses[GIR])
     prereq_str = re.sub("(.*)/''permission of instructor''", lambda x: x.group(1)[1:-1], prereq_str)
-    prereq_str = re.sub("[\[\] ]", "", prereq_str)
+    prereq_str = re.sub("''Coreq: ([\w\.]*)''", lambda x: x.group(1), prereq_str)
     prereq_str = re.sub("/", ",", prereq_str)
     prereq_str = re.sub(",", ",,", prereq_str)
     prereq_str = "[" + prereq_str + "]"
@@ -188,4 +188,3 @@ def find_schedule(majors, minors, start_semester, end_semester = None, past_sche
 if __name__ == "__main__":
     all_courses, major_reqs = read_data_files(all_courses_file, major_reqs_file)
     print(find_schedule(0, 0, 0, 0))
->>>>>>> 0d909f07bb33e34cd185854dd0e07ff8334884d8
