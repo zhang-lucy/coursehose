@@ -54,6 +54,7 @@ export default {
         padding: 20px;
         flex: 80%;
         background: pink;
+        overflow: auto;
         /* width: 50%;
         height: 100vh; */
     }

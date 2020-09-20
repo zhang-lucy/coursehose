@@ -1,14 +1,22 @@
 <template>
   <div id="road">
-    <!-- <div class="row"> -->
       <div v-for="(courses, semester) in semesters" :key="semester">
         <h3 class="semesterName">{{ semester }}</h3>
         <draggable class="list-group row" :list="courses" group="g1"> <!-- TODO I don't think the semester values change in App when you move them around tbh oops -->
           <div v-for="course in courses" class="course list-group-item" :key="course.name">
             <div>
-                <button @click="handleDelete(course, semester)">x</button>
-                <!-- <span class = "larger">{{ course.number }} </span> -->
-                <span class = "smaller">{{ course.name }}</span>        
+                <button type="button" class="close" aria-label="Close" @click="handleDelete(course,semester)">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+                <!-- <span class = "larger">{{ course.name }} </span> -->
+                <!-- TODO attempt to add course names fix later need to access course.js -->
+                <!-- <span class = "smaller">{{ classes[course.name]['n'] }}</span>-->
+                <span class="smaller">{{ course.name }}</span>
+                <!-- if (course.toString() in classes) {
+                    courseItem = {number: course, name: classes[course.toString()]['n']};
+                } else {
+                    courseItem = {number: course, name: "No Class Found"};
+                } -->
             </div>
           </div>
         </draggable>
@@ -17,8 +25,6 @@
         <!-- <rawDisplayer class="col-3" :value="courses" title="List 1" />  ????  -->
         <!-- <rawDisplayer class="col-3" :value="list2" title="List 2" /> -->
     </div>
-
-  <!-- </div> -->
 </template>
 
 <script>
