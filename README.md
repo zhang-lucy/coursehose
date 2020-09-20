@@ -16,3 +16,6 @@ Start the server:
 ### Vue Devtools:  
 [Vue DevTools on Chrome](https://chrome.google.com/webstore/detail/vuejs-devtools/nhdogjmejiglipccpnnnanhbledajbpd?hl=en)  
 [Vue DevTools on FireFox](https://addons.mozilla.org/en-US/firefox/addon/vue-js-devtools/)
+
+## 2. Details
+[Submission and Demo for HackMIT 2020](https://spectacle.hackmit.org/project/380)
