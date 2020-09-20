@@ -219,21 +219,30 @@ def find_schedule(major, start_semester, end_semester = None, past_schedule = No
     # temporarily assume four classes a semester, later can "binary search" or sth
     curr_semester = start_semester
 
-    no_prereqs = []
+    no_prereqs = levels[0]
     for course in levels[0]:
-        if len(get_course_prereqs(course)) == 0:
-            no_prereqs.append(course)
+        prereqs = get_course_prereqs(course)
+        for prereq in prereqs:
+            if prereq in no_prereqs:
+                no_prereqs.remove(prereq)
 
     for course in no_prereqs:
         levels[0].remove(course)
 
+    print(no_prereqs)
+    print(levels)
+
     for i in range(curr_level - 1, -1, -1):
+        if (curr_semester > end_semester): 
+            return -1;
         # print("asjkshdj", i)
         level_courses = levels[i]
         # print("asjkshdj", level_courses)
         for course in level_courses:
             while len(ans[curr_semester]) >= 4:
                 curr_semester += 1
+                if (curr_semester > end_semester): 
+                    return -1;
             next_offering = find_next_offering(course, curr_semester)
             # print("here", ans[next_offering])
             ans[next_offering].append(course)
