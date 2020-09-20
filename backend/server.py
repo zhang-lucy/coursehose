@@ -226,6 +226,12 @@ def find_schedule(major, start_semester, end_semester = None, past_schedule = No
             if prereq in no_prereqs:
                 no_prereqs.remove(prereq)
 
+    for course in levels[1]:
+        prereqs = get_course_prereqs(course)
+        for prereq in prereqs:
+            if prereq in no_prereqs:
+                no_prereqs.remove(prereq)
+
     for course in no_prereqs:
         levels[0].remove(course)
 
