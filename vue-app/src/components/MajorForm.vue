@@ -23,6 +23,7 @@
 </template>
 
 <script>
+  import { getRoad } from "../scripts/roadAPICall.js";
   export default {
     name: 'major-form',
     props: ['years','majors'],
@@ -44,9 +45,13 @@
       handleMajorSubmit() {
         console.log("Major: "+this.major.value+", Year: "+this.year.value);
         this.$emit('add:major', this.major, this.year);
-        // this.major.value = '';
-        // this.year.value = '';
         this.$emit('next:page');
+        var dummyEndpoint = "/getRoad" // TODO update with actual endpoint, also maybe need to incorporate year
+        var major = JSON.parse(JSON.stringify(this.major)); // weird bug with observables
+        var road = getRoad(dummyEndpoint, major);
+        this.$emit('update:road', road);
+        this.major.value = '';
+        this.year.value = '';
       }
     }
   }

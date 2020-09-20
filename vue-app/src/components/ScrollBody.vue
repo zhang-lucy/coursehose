@@ -8,6 +8,7 @@
             :years="years"
             :majors="majors" 
             @next:page="nextPage"
+            @update:road="updateRoad"
         />
         <constraint-burger
             v-if="!login_page"
@@ -64,6 +65,8 @@ export default {
         },
         nextPage() {
             this.$emit('next:page');
+        updateRoad(road) {
+            this.$emit('update:road', road)
         }
     }
 }
