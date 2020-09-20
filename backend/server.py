@@ -81,18 +81,26 @@ def find_offerings(course, start_semester, end_semester):
         semesters = [start_semester, start_semester+2]
     return semesters
 
+
 def find_next_offering(course, start_semester):
     return start_semester
 
-def find_schedule(majors, minors, start_semester, end_semester = None, past_schedule = {}, existing_schedule = {}, cost_function = "classes"):
+
+def find_schedule(majors, minors, start_semester, end_semester = None, past_schedule = None, existing_schedule = None, cost_function = "classes"):
     # can prob just assume semesters are numbered as 2*(year - 2000) + (1 if fall) or sth
     # past_schedule is a dict from sem number to class we hardcode taking that sem
     # existing_schedule is a dict from sem number to class we want to hardcode taking that sem
     # start_semester is the "current" semester
     # for now let's just assume we minimize classes
 
-    if end_semester == None:
+    if end_semester is None:
         end_semester = start_semester + 7
+
+    if past_schedule is None:
+        past_schedule = {}
+
+    if existing_schedule is None:
+        existing_schedule = {}
 
     # TODO: comment the next few lines back in when we are not testing
     # all_reqs = get_reqs("GIRS")
