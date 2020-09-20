@@ -4,9 +4,9 @@
   <div id="major-form">
     <form>
       <div class="select">
-        <label>What is your course?</label>
+        <label>What is your major?</label>
         <select v-model="major" onchange="validateDropdown(this)">
-          <option disabled value="">Course</option>
+          <option disabled value="">Major</option>
           <option v-for="major in majors" :key="major.id" :value="major">{{ major.value }}</option>
         </select>
       </div>
@@ -17,7 +17,7 @@
           <option v-for="year in years" :key="year.id" :value="year">{{ year.value }}</option>
         </select>
       </div>
-      <button class="submit">Submit</button>
+      <b-button variant="info" class="submit">Submit</b-button>
     </form>
 
   </div>
@@ -47,7 +47,9 @@
 
 <style scoped>
   form {
+    padding-bottom: 2rem;
     margin-bottom: 2rem;
+    border-bottom: 2px solid black;
   }
   label {
     display: block;
@@ -56,8 +58,8 @@
     display: block;
     margin-bottom: 1rem;
   }
-  .submit{
+  .submit {
     display: block;
-    margin:auto;
+    margin: auto;
   }
 </style>

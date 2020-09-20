@@ -2,7 +2,7 @@
   <div id="add-course">
     <form @submit.prevent="handleSubmit">
 
-      <label>Add a course:</label>
+      <span>Add a course: </span>
       <input
         ref="first"
         type="text"
@@ -13,8 +13,14 @@
         <option disabled value="">Term</option>
         <option>Fall 2020</option>
         <option>Spring 2021</option>
+        <option>Fall 2021</option>
+        <option>Spring 2022</option>
+        <option>Fall 2022</option>
+        <option>Spring 2023</option>
+        <option>Fall 2023</option>
+        <option>Spring 2024</option>
       </select>
-      <button>Submit</button>
+      <b-button variant="info" style="margin-left: 15px">Submit</b-button>
     </form>
   </div>
 </template>
@@ -35,6 +41,8 @@
       handleSubmit() {
         console.log("Added " + this.course.name + " in " + this.course.sem + "!");
         this.$emit('add:course', this.course)
+        this.course.name = '';
+        this.course.sem = '';
       },
     }
   }
@@ -43,6 +51,7 @@
 
 <style scoped>
   form {
-    margin-bottom: 2rem;
+    padding-bottom: 2rem;
+    border-bottom: 2px solid black;
   }
 </style>

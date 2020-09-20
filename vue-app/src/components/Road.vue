@@ -66,7 +66,7 @@ export default {
     color: #454545;
   }
   .course {
-    width: 20%;
+    width: 15%;
     background: teal;
     color: white;
     border-radius: 5px;
@@ -75,10 +75,10 @@ export default {
     display: inline-block;
   }
   .larger {
-    font-size: 25px;
+    font-size: 20px;
   }
   .smaller {
-    font-size: 20px;
+    font-size: 15px;
   }
   .row {
     display: block;

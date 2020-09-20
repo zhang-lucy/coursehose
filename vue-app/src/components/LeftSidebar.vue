@@ -28,9 +28,10 @@ export default {
     .left-sidebar {
         position: fixed;
         flex: 20%;
-        background: green;
+        background: #ebeff2;
         width: 400px;
-        height: 100vh;
+        /* height: 100vh; */
+        height: 20vh;
         padding: 20px;
     }
 

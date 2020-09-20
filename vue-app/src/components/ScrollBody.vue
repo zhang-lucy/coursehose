@@ -53,7 +53,7 @@ export default {
     .scroll-body {
         padding: 20px;
         flex: 80%;
-        background: pink;
+        background: lightskyblue;
         overflow: auto;
         /* width: 50%;
         height: 100vh; */
